@@ -1,4 +1,5 @@
 import { FaCircle } from "react-icons/fa";
+import BrushSizeMenu from "./BrushSizeMenu"
 
 function Canvas() {
     const brushColors: string[] = [
@@ -15,6 +16,7 @@ function Canvas() {
         "purple",
         "green",
     ];
+
     return (
         <>
             {/* canvas */}
@@ -23,15 +25,19 @@ function Canvas() {
                 {/* canvas options */}
 
                 <div className="flex items-center h-[60px] w-full">
-                    {/* brush colors */}
+                    {/* mobile brush colors button */}
+
+                    <div className="w-full sm:hidden ">
                     <button
-                        className="sm:hidden h-[40px] w-full"
+                        className="sm:hidden h-[40px] w-[40px] focus:bg-indigo-600 rounded-lg"
                         style={{
                             backgroundImage: `url("./paint.avif")`,
                             backgroundSize: "contain",
                             backgroundRepeat: "no-repeat",
                         }}
                     ></button>
+                    </div>
+                    {/* brush colors*/}
                     <ul className="w-[300px] h-full sm:flex hidden flex flex-wrap">
                         {brushColors.map((color) => (
                             <li
@@ -44,34 +50,37 @@ function Canvas() {
 
                     {/* brush type */}
                     <div className="w-full h-14 rounded-sm gap-1 flex items-center justify-around">
-                        <button
-                            style={{
-                                backgroundImage: `url("./pencil.avif")`,
-                                backgroundSize: "contain",
-                                backgroundRepeat: "no-repeat",
-                            }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
-                        ></button>
-                        <button
-                            style={{
-                                backgroundImage: `url("./eraser.avif")`,
-                                backgroundSize: "contain",
-                                backgroundRepeat: "no-repeat",
-                            }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
-                        ></button>
+                        
+                            <button
+                                style={{
+                                    backgroundImage: `url("./pencil.avif")`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                }}
+                                className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
+                            ></button>
+
+                            <button
+                                style={{
+                                    backgroundImage: `url("./eraser.avif")`,
+                                    backgroundSize: "contain",
+                                    backgroundRepeat: "no-repeat",
+                                }}
+                                className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
+                            ></button>
 
                         {/* brush sizes */}
-
                         <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
                             <FaCircle size={12} />
                         </button>
                         <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
                             <FaCircle size={20} />
                         </button>
-                        <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center flex w-10  focus:bg-indigo-600">
+                        <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
                             <FaCircle size={28} />
                         </button>
+
+                        <BrushSizeMenu/>
 
                         {/* reset canvas */}
                         <button
