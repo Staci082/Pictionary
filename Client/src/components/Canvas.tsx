@@ -20,23 +20,30 @@ function Canvas() {
             {/* canvas */}
             <div className="flex flex-col gap-1">
                 <div className="w-full rounded-sm lg:h-96 sm:h-80  md:min-w-[500px] h-64 bg-blue-200"></div>
-              {/* canvas options */}
+                {/* canvas options */}
 
-                {/* brush colors */}
-                <div className="flex w-full">
-                <ul className="w-[300px] h-full flex flex-wrap">
-                    {brushColors.map((color) => (
-                        <li
-                            key={color}
-                            style={{ backgroundColor: color }}
-                            className={`w-[30px] h-[30px] bg-${color}`}
-                        ></li>
-                    ))}
-                </ul>
+                <div className="flex items-center h-[60px] w-full">
+                    {/* brush colors */}
+                    <button
+                        className="sm:hidden h-[40px] w-full"
+                        style={{
+                            backgroundImage: `url("./paint.avif")`,
+                            backgroundSize: "contain",
+                            backgroundRepeat: "no-repeat",
+                        }}
+                    ></button>
+                    <ul className="w-[300px] h-full sm:flex hidden flex flex-wrap">
+                        {brushColors.map((color) => (
+                            <li
+                                key={color}
+                                style={{ backgroundColor: color }}
+                                className={`w-[30px] h-[30px] bg-${color}`}
+                            ></li>
+                        ))}
+                    </ul>
 
-                {/* brush type */}
-                <div className="w-full h-14 rounded-sm gap-1 flex">
-                    <div className="w-1/3 gap-4 h-full flex items-center justify-center">
+                    {/* brush type */}
+                    <div className="w-full h-14 rounded-sm gap-1 flex items-center justify-around">
                         <button
                             style={{
                                 backgroundImage: `url("./pencil.avif")`,
@@ -53,16 +60,21 @@ function Canvas() {
                             }}
                             className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
                         ></button>
-                    </div>
-                    {/* brush sizes */}
-                    <div className="w-2/3 h-full flex justify-around items-center">
-                    
-                    <button className="text-white flex items-center rounded-lg justify-center h-10 w-10 focus:bg-indigo-600"><FaCircle size={12}/></button>
-                    <button className="text-white flex items-center rounded-lg justify-center h-10 w-10 focus:bg-indigo-600"><FaCircle size={20}/></button>
-                    <button className="text-white flex items-center rounded-lg justify-center h-10 w-10 focus:bg-indigo-600"><FaCircle size={28}/></button>
-                    
-                    {/* reset canvas */}
-                    <button
+
+                        {/* brush sizes */}
+
+                        <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
+                            <FaCircle size={12} />
+                        </button>
+                        <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
+                            <FaCircle size={20} />
+                        </button>
+                        <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center flex w-10  focus:bg-indigo-600">
+                            <FaCircle size={28} />
+                        </button>
+
+                        {/* reset canvas */}
+                        <button
                             style={{
                                 backgroundImage: `url("./trash.avif")`,
                                 backgroundSize: "contain",
@@ -71,7 +83,6 @@ function Canvas() {
                             className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
                         ></button>
                     </div>
-                </div>
                 </div>
             </div>
         </>

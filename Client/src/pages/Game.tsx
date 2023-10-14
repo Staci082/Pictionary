@@ -1,4 +1,5 @@
 import Canvas from "../components/Canvas"
+import Chat from "../components/Chat"
 
 function Game() {
 
@@ -25,10 +26,10 @@ function Game() {
                     </div>
                   
                   <Canvas/>
-                  
-                    {/* chat */}
-                    <div className="w-[500px] lg:flex hidden h-96 bg-blue-200"></div>
 
+                  <div className="w-[500px] relative lg:flex hidden h-96 bg-blue-200">
+                  <Chat/>
+                  </div>
                     {/* mobile player info + chat */}
                     <div className="flex gap-4 lg:hidden">
                         {/* player info */}
@@ -44,7 +45,9 @@ function Game() {
                             />
                         </div>
                         {/* chat */}
-                        <div className="w-3/5 lg:hidden rounded-sm h-96 bg-blue-200"></div>
+                        <div className=" w-2/3 relative lg:hidden rounded-sm h-96 bg-blue-200">
+                        <Chat/>
+                        </div>
                     </div>
                 </div>
             </div>
