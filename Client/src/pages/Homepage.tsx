@@ -1,6 +1,9 @@
 import AvatarSlider from "../components/AvatarSlider";
+import { useNavigate } from "react-router-dom"
 
 function Homepage() {
+  const navigate = useNavigate()
+
     return (
         <form className="flex flex-col items-center gap-8">
             <label htmlFor="username"></label>
@@ -12,7 +15,7 @@ function Homepage() {
 
             <AvatarSlider/>
 
-            <button className="w-[300px] bg-violet-700 p-2 rounded-lg w-[300] text-white font-bold shadow-xl shadow-indigo-950/50 hover:translate-y-1 hover:bg-indigo-600">
+            <button onClick={() => navigate("/game")} className="w-[300px] bg-violet-700 p-2 rounded-lg w-[300] text-white font-bold shadow-xl shadow-indigo-950/50 hover:translate-y-1 hover:bg-indigo-600">
                 PLAY!
             </button>
         </form>
