@@ -1,9 +1,43 @@
-
-
 function Game() {
-  return (
-    <div>Game</div>
-  )
+    return (
+        <>
+            <div className="w-screen min-h-screen py-8 flex flex-col items-center justify-center gap-4">
+                {/* header */}
+                <div className="w-[85%] h-12 relative flex items-center justify-center bg-white rounded-lg">
+                    Word
+                </div>
+
+                <div className="w-[85%] flex flex-col gap-4 lg:flex-row">
+                     {/* player info */}
+                        <div className="w-[400px] hidden rounded-sm h-12 bg-white lg:flex items-center justify-center relative">
+                            <div className="flex flex-col">
+                                <b className="text-sm">Username</b>
+                                <p className="text-sm">Points: 100</p>
+                            </div>
+                            <img src="/face3.avif" alt="player avatar" className="w-8 absolute right-2 top-2 rounded-lg"/>
+                        </div>
+                        {/* canvas */}
+                    <div className="w-full rounded-sm lg:h-96 sm:h-80 h-64 bg-blue-200"></div>
+                    {/* chat */}
+                    <div className="w-[500px] lg:flex hidden h-96 bg-blue-200"></div>
+
+                    {/* player info + chat position change for mobile */}
+                    <div className="flex gap-4 lg:hidden">
+                        {/* player info */}
+                        <div className="w-2/5 lg:hidden rounded-sm sm:h-12 h-10 bg-white flex items-center justify-center relative">
+                            <div className="flex flex-col">
+                                <b className="text-xs">Username</b>
+                                <p className="text-xs">Points: 100</p>
+                            </div>
+                            <img src="/face3.avif" alt="player avatar" className="sm:w-8 w-6 absolute sm:right-2 sm:top-2 right-1 rounded-lg"/>
+                        </div>
+                         {/* chat */}
+                        <div className="w-3/5 lg:hidden rounded-sm h-96 bg-blue-200"></div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
 
-export default Game
+export default Game;
