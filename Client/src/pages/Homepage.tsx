@@ -1,4 +1,4 @@
-import { GrNext, GrPrevious } from "react-icons/gr";
+import AvatarSlider from "../components/AvatarSlider";
 
 function Homepage() {
     return (
@@ -10,14 +10,9 @@ function Homepage() {
                 className="bg-transparent p-2 w-[300px] border-solid border-white border-2 rounded-xl outline-none text-white text-center"
             />
 
-            <div className="w-[300] flex flex-row items-center gap-10">
-                <GrPrevious size={28} />
+            <AvatarSlider/>
 
-                <div className="border-2 h-[150px] w-[150px]"></div>
-                <GrNext size={28}  />
-            </div>
-
-            <button className="w-[300px] bg-violet-700 p-2 rounded-lg w-[300] text-white font-bold  shadow-xl shadow-indigo-950/50">
+            <button className="w-[300px] bg-violet-700 p-2 rounded-lg w-[300] text-white font-bold shadow-xl shadow-indigo-950/50 hover:translate-y-1 hover:bg-indigo-600">
                 PLAY!
             </button>
         </form>
