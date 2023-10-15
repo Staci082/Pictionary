@@ -1,23 +1,29 @@
 import { useState } from "react";
-
+import BrushTypeMenu from "./BrushTypeMenu";
 import BrushSizeMenu from "./BrushSizeMenu";
 import ColorMenu from "./ColorMenu";
 
 function Canvas() {
     const [selectedColor, setSelectedColor] = useState<string>();
-    const [selectedBrushSize, setBrushSize] = useState<string>();
+    const [selectedBrushSize, setSelectedBrushSize] = useState<string>();
+    const [selectedBrushType, setSelectedBrushType] = useState<string>();
 
     const handleColorSelect = (color: string) => {
         setSelectedColor(color);
     };
 
-    const handleBrushSelect = (size: string) => {
-        setBrushSize(size);
+    const handleBrushSizeSelect = (size: string) => {
+        setSelectedBrushSize(size);
     };
 
-    // COLOR MENU WORKING GRAB THIS
+    const handleBrushTypeSelect = (type: string) => {
+        setSelectedBrushType(type);
+    };
+
+    // WORKING MENU'S GRAB THIS
     console.log(selectedColor || "black");
     console.log(selectedBrushSize || "10px");
+    console.log(selectedBrushType || "pencil");
 
     return (
         <>
@@ -30,28 +36,14 @@ function Canvas() {
                     <div className="w-1/2 flex gap-3 items-center h-full">
                         <ColorMenu onColorSelect={handleColorSelect} />
 
-                        <BrushSizeMenu onBrushSizeSelect={handleBrushSelect} />
+                        <BrushSizeMenu
+                            onBrushSizeSelect={handleBrushSizeSelect}
+                        />
                     </div>
 
                     {/* brush type */}
                     <div className="w-1/2 h-10 rounded-sm flex items-center justify-end gap-4">
-                        <button
-                            style={{
-                                backgroundImage: `url("./pencil.avif")`,
-                                backgroundSize: "contain",
-                                backgroundRepeat: "no-repeat",
-                            }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-xl"
-                        ></button>
-
-                        <button
-                            style={{
-                                backgroundImage: `url("./eraser.avif")`,
-                                backgroundSize: "contain",
-                                backgroundRepeat: "no-repeat",
-                            }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-xl"
-                        ></button>
+                        <BrushTypeMenu onBrushTypeSelect={handleBrushTypeSelect}/>
 
                         {/* reset canvas */}
                         <div className="h-10 w-10">

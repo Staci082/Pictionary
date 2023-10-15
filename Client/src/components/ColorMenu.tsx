@@ -45,6 +45,7 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
                 <button
                     className=" h-[40px] w-[40px] focus:bg-indigo-600 rounded-xl"
                     onClick={toggleMenu}
+                    onMouseEnter={toggleMenu}
                     style={{
                         backgroundImage: `url("./paint.avif")`,
                         backgroundSize: "contain",
@@ -54,7 +55,10 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
 
                 {/* color menu pop up */}
                 {isOpen && (
-                    <ul className="absolute bg-indigo-600 bottom-[53px] w-auto h-auto p-3 flex items-center bg-indigo-600 rounded">
+                    <ul
+                        className="absolute bg-indigo-600 bottom-[53px] w-auto h-auto p-3 flex items-center bg-indigo-600 rounded"
+                        onMouseLeave={toggleMenu}
+                    >
                         {brushColors.map((option, index) => (
                             <li
                                 key={index}
