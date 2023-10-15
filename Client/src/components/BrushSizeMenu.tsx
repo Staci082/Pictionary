@@ -18,7 +18,7 @@ const PopupMenu: React.FC = () => {
 
 
   return (
-    <div className="relative sm:hidden flex">
+    <div className="relative sm:hidden flex flex-row">
       <button
         onClick={toggleMenu}
         className="text-white w-10 flex items-center rounded-lg justify-center flex w-10  focus:bg-indigo-600 cursor-pointer"

@@ -34,27 +34,16 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
 
     return (
         <>
-            {/* brush colors*/}
-            <ul className="w-[300px] h-full sm:flex hidden flex flex-wrap">
-                {brushColors.map((color) => (
-                    <li
-                        key={color}
-                        style={{ backgroundColor: color }}
-                        className={`w-[30px] h-[30px] cursor-pointer bg-${color}`}
-                    ></li>
-                ))}
-            </ul>
-
-            {/* mobile brush colors */}
-            <div className="w-full sm:hidden flex gap-3 relative">
+            {/* brush colors */}
+            <div className="flex gap-3 relative">
                 <div
                     style={{ backgroundColor: selectedColor || "black" }}
-                    className="sm:hidden h-[40px] w-[40px]"
+                    className=" h-[40px] w-[40px]"
                 ></div>
 
                 {/* color menu button */}
                 <button
-                    className="sm:hidden h-[40px] w-[40px] focus:bg-indigo-600 rounded-lg"
+                    className=" h-[40px] w-[40px] focus:bg-indigo-600 rounded-lg"
                     onClick={toggleMenu}
                     style={{
                         backgroundImage: `url("./paint.avif")`,
@@ -74,7 +63,7 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
                             >
                                 <div
                                     style={{ backgroundColor: option }}
-                                    className={`sm:hidden h-[24px] w-[24px]`}
+                                    className={` h-[24px] w-[24px]`}
                                 ></div>
                             </li>
                         ))}
