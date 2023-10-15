@@ -22,10 +22,6 @@ function Canvas() {
         setSelectedBrushType(type);
     };
 
-    console.log(selectedColor);
-    console.log(selectedBrushSize);
-    console.log(selectedBrushType);
-
     const { onMouseDown, setCanvasRef } = useOnDraw(onDraw);
 
     // grab dimensions of canvas
@@ -42,12 +38,20 @@ function Canvas() {
         ctx: CanvasRenderingContext2D,
         point: { x: number; y: number },
         prevPoint: { x: number; y: number } | null
-    ) {
-        const brushSize = parseInt(selectedBrushSize, 10/2) || 5; 
+
+    ) { // retrieve selected brush size and parse
+        if (selectedBrushType === "eraser") {
+        // Clear the canvas by filling it with white
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    } else {
+        // Retrieve selected brush size and parse
+        const brushSize = parseInt(selectedBrushSize, 10) || 5;
         drawLine(prevPoint, point, ctx, brushSize);
     }
+    }
 
-    // add line
+    // draw line
     function drawLine(
         start: { x: number; y: number } | null,
         end: { x: number; y: number },
@@ -81,6 +85,17 @@ function Canvas() {
         ctx.fill();
     }
 
+    const clearCanvas = () => {
+        const canvas = document.querySelector("canvas") as HTMLCanvasElement | null;
+        if (!canvas) return;
+    
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+    
+        // Clear the entire canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
     return (
         <div className="flex flex-col gap-1">
             {/* drawing canvas */}
@@ -96,7 +111,7 @@ function Canvas() {
                     <BrushSizeMenu onBrushSizeSelect={handleBrushSizeSelect} />
                 </div>
                 <div className="w-1/2 h-10 rounded-sm flex items-center justify-end gap-4">
-                    <BrushTypeMenu onBrushTypeSelect={handleBrushTypeSelect} />
+                    <BrushTypeMenu onBrushTypeSelect={handleBrushTypeSelect} clearCanvas={clearCanvas} />
                 </div>
             </div>
         </div>

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 
 interface BrushTypeMenuProps {
     onBrushTypeSelect: (size: string) => void;
+    clearCanvas: () => void; 
 }
 
-const BrushTypeMenu: React.FC<BrushTypeMenuProps> = ({ onBrushTypeSelect }) => {
+const BrushTypeMenu: React.FC<BrushTypeMenuProps> = ({ onBrushTypeSelect, clearCanvas }) => {
     const [selectedBrushType, setSelectedBrushType] =
         useState<string>("pencil");
 
-    const brushTypes: string[] = ["pencil", "eraser", "trash"];
+    const brushTypes: string[] = ["pencil", "eraser"];
 
     const selectOption = (option: string) => {
         setSelectedBrushType(option);
@@ -31,6 +32,15 @@ const BrushTypeMenu: React.FC<BrushTypeMenuProps> = ({ onBrushTypeSelect }) => {
                 `}
                 ></button>
             ))}
+             <button
+                    onClick={clearCanvas}
+                    style={{
+                        backgroundImage: `url("./trash.avif")`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                    }}
+                    className="h-10 w-10 rounded-xl focus:bg-indigo-600"
+                ></button>
         </>
     );
 };
