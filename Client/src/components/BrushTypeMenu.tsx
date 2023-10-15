@@ -9,18 +9,27 @@ const BrushTypeMenu: React.FC<BrushTypeMenuProps> = ({ onBrushTypeSelect, clearC
     const [selectedBrushType, setSelectedBrushType] =
         useState<string>("pencil");
 
-    const brushTypes: string[] = ["pencil", "eraser"];
+    const brushTypes: string[] = ["pencil", "eraser", "trash"];
 
     const selectOption = (option: string) => {
         setSelectedBrushType(option);
         onBrushTypeSelect(option);
+    };
+
+    const clearCanvasIfNeeded = (type: string) => {
+        if (type === "trash") {
+            clearCanvas();
+        } 
     };
     return (
         <>
             {brushTypes.map((type, index) => (
                 <button
                 key={index}
-                    onClick={() => selectOption(type)}
+                    onClick={() => {
+                        selectOption(type);
+                        clearCanvasIfNeeded(type);
+                    }}
                     style={{
                         backgroundImage: `url("./${type}.avif")`,
                         backgroundSize: "contain",
@@ -32,15 +41,6 @@ const BrushTypeMenu: React.FC<BrushTypeMenuProps> = ({ onBrushTypeSelect, clearC
                 `}
                 ></button>
             ))}
-             <button
-                    onClick={clearCanvas}
-                    style={{
-                        backgroundImage: `url("./trash.avif")`,
-                        backgroundSize: "contain",
-                        backgroundRepeat: "no-repeat",
-                    }}
-                    className="h-10 w-10 rounded-xl focus:bg-indigo-600"
-                ></button>
         </>
     );
 };

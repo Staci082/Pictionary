@@ -38,17 +38,12 @@ function Canvas() {
         ctx: CanvasRenderingContext2D,
         point: { x: number; y: number },
         prevPoint: { x: number; y: number } | null
+    ) {
+        // retrieve selected brush size and parse
 
-    ) { // retrieve selected brush size and parse
-        if (selectedBrushType === "eraser") {
-        // Clear the canvas by filling it with white
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    } else {
         // Retrieve selected brush size and parse
-        const brushSize = parseInt(selectedBrushSize, 10/2) || 5;
+        const brushSize = parseInt(selectedBrushSize, 10 / 2) || 5;
         drawLine(prevPoint, point, ctx, brushSize);
-    }
     }
 
     // draw line
@@ -61,15 +56,18 @@ function Canvas() {
         start = start ?? end;
         ctx.beginPath();
         ctx.lineWidth = width;
-        ctx.strokeStyle =
-            selectedBrushType === "pencil" ? selectedColor || "black" : "white"; // or else eraser white
 
+        // change brush color depending on brush type
+        if (selectedBrushType !== "eraser") {
+            ctx.strokeStyle = selectedColor || "black";
+            ctx.fillStyle = selectedColor || "black";
+        } else {
+            ctx.strokeStyle = "white";
+            ctx.fillStyle = "white";
+        }
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);
         ctx.stroke();
-
-        ctx.fillStyle =
-            selectedBrushType === "pencil" ? selectedColor || "black" : "white";
         ctx.beginPath();
 
         {
@@ -86,12 +84,14 @@ function Canvas() {
     }
 
     const clearCanvas = () => {
-        const canvas = document.querySelector("canvas") as HTMLCanvasElement | null;
+        const canvas = document.querySelector(
+            "canvas"
+        ) as HTMLCanvasElement | null;
         if (!canvas) return;
-    
+
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
-    
+
         // Clear the entire canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
@@ -111,7 +111,10 @@ function Canvas() {
                     <BrushSizeMenu onBrushSizeSelect={handleBrushSizeSelect} />
                 </div>
                 <div className="w-1/2 h-10 rounded-sm flex items-center justify-end gap-4">
-                    <BrushTypeMenu onBrushTypeSelect={handleBrushTypeSelect} clearCanvas={clearCanvas} />
+                    <BrushTypeMenu
+                        onBrushTypeSelect={handleBrushTypeSelect}
+                        clearCanvas={clearCanvas}
+                    />
                 </div>
             </div>
         </div>
