@@ -11,8 +11,9 @@ function Game() {
                     Word
                 </div>
 
+                {/* main container */}
                 <div className="w-[90%] flex flex-col gap-4 lg:flex-row">
-                    
+                    {/* player info */}
                     <div className="lg:w-[400px] hidden rounded-sm lg:flex lg:flex-col">
                         <Players />
                         <Players />
@@ -20,20 +21,22 @@ function Game() {
                         <Players />
                     </div>
                     <Canvas />
-
+                    {/* chat */}
                     <div className="w-[500px] relative lg:flex hidden h-96 bg-blue-200">
                         <Chat />
                     </div>
-                    {/* mobile player info + chat */}
+
+
+                    {/* mobile container */}
                     <div className="flex gap-4 lg:hidden">
-                        {/* player info */}
+                        {/* mobile player info */}
                         <div className="w-2/4 lg:hidden">
                             <Players />
                             <Players />
                             <Players />
                             <Players />
                         </div>
-                        {/* chat */}
+                        {/* mobile chat */}
                         <div className=" w-2/3 relative lg:hidden rounded-sm h-64 bg-blue-200">
                             <Chat />
                         </div>
