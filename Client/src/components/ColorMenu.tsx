@@ -38,12 +38,12 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
             <div className="flex gap-3 relative">
                 <div
                     style={{ backgroundColor: selectedColor || "black" }}
-                    className=" h-[40px] w-[40px]"
+                    className=" h-[38px] w-[38px]"
                 ></div>
 
                 {/* color menu button */}
                 <button
-                    className=" h-[40px] w-[40px] focus:bg-indigo-600 rounded-lg"
+                    className=" h-[40px] w-[40px] focus:bg-indigo-600 rounded-xl"
                     onClick={toggleMenu}
                     style={{
                         backgroundImage: `url("./paint.avif")`,

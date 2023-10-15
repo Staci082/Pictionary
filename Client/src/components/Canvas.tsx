@@ -1,41 +1,36 @@
 import { useState } from "react";
-import { FaCircle } from "react-icons/fa";
+
 import BrushSizeMenu from "./BrushSizeMenu";
 import ColorMenu from "./ColorMenu";
 
 function Canvas() {
     const [selectedColor, setSelectedColor] = useState<string>();
+    const [selectedBrushSize, setBrushSize] = useState<string>();
 
     const handleColorSelect = (color: string) => {
         setSelectedColor(color);
     };
 
+    const handleBrushSelect = (size: string) => {
+        setBrushSize(size);
+    };
+
     // COLOR MENU WORKING GRAB THIS
     console.log(selectedColor || "black");
+    console.log(selectedBrushSize || "10px");
 
     return (
         <>
             {/* canvas */}
             <div className="flex flex-col gap-1">
                 <div className="w-full rounded-sm lg:h-96 sm:h-80  md:min-w-[500px] h-64 bg-white"></div>
-                {/* canvas options */}
 
+                {/* canvas options */}
                 <div className="flex  items-center justify-between h-[60px] w-full">
                     <div className="w-1/2 flex gap-3 items-center h-full">
-                    <ColorMenu onColorSelect={handleColorSelect} />
+                        <ColorMenu onColorSelect={handleColorSelect} />
 
-                    {/* brush sizes */}
-                    <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
-                        <FaCircle size={12} />
-                    </button>
-                    <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
-                        <FaCircle size={20} />
-                    </button>
-                    <button className="text-white h-10 w-10 flex items-center rounded-lg justify-center sm:flex w-10 hidden focus:bg-indigo-600">
-                        <FaCircle size={28} />
-                    </button>
-
-                    <BrushSizeMenu />
+                        <BrushSizeMenu onBrushSizeSelect={handleBrushSelect} />
                     </div>
 
                     {/* brush type */}
@@ -46,7 +41,7 @@ function Canvas() {
                                 backgroundSize: "contain",
                                 backgroundRepeat: "no-repeat",
                             }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
+                            className="h-10 w-10 focus:bg-indigo-600 rounded-xl"
                         ></button>
 
                         <button
@@ -55,7 +50,7 @@ function Canvas() {
                                 backgroundSize: "contain",
                                 backgroundRepeat: "no-repeat",
                             }}
-                            className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
+                            className="h-10 w-10 focus:bg-indigo-600 rounded-xl"
                         ></button>
 
                         {/* reset canvas */}
@@ -66,7 +61,7 @@ function Canvas() {
                                     backgroundSize: "contain",
                                     backgroundRepeat: "no-repeat",
                                 }}
-                                className="h-10 w-10 focus:bg-indigo-600 rounded-lg"
+                                className="h-10 w-10 focus:bg-indigo-600 rounded-xl"
                             ></button>
                         </div>
                     </div>

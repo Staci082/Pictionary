@@ -9,10 +9,9 @@ export default function Players() {
                 <img
                     src="/face4.avif"
                     alt="player avatar"
-                    className="w-10 hover:scale-150 absolute right-1 top-1 rounded-lg"
+                    className="w-10 hover:scale-150 absolute right-1 top-1 rounded-xl"
                 />
-                
-                </div>
+            </div>
         </>
     );
 }
