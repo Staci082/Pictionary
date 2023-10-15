@@ -46,7 +46,7 @@ function Canvas() {
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     } else {
         // Retrieve selected brush size and parse
-        const brushSize = parseInt(selectedBrushSize, 10) || 5;
+        const brushSize = parseInt(selectedBrushSize, 10/2) || 5;
         drawLine(prevPoint, point, ctx, brushSize);
     }
     }
