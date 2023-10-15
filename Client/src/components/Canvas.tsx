@@ -1,52 +1,19 @@
 import { FaCircle } from "react-icons/fa";
-import BrushSizeMenu from "./BrushSizeMenu"
+import BrushSizeMenu from "./BrushSizeMenu";
+import ColorMenu from "./ColorMenu";
 
 function Canvas() {
-    const brushColors: string[] = [
-        "white",
-        "gray",
-        "red",
-        "orange",
-        "yellow",
-        "lime",
-        "cyan",
-        "blue",
-        "purple",
-        "blue",
-        "purple",
-        "green",
-    ];
 
     return (
         <>
             {/* canvas */}
             <div className="flex flex-col gap-1">
-                <div className="w-full rounded-sm lg:h-96 sm:h-80  md:min-w-[500px] h-64 bg-blue-200"></div>
+                <div className="w-full rounded-sm lg:h-96 sm:h-80  md:min-w-[500px] h-64 bg-white"></div>
                 {/* canvas options */}
 
                 <div className="flex items-center h-[60px] w-full">
-                    {/* mobile brush colors button */}
-
-                    <div className="w-full sm:hidden ">
-                    <button
-                        className="sm:hidden h-[40px] w-[40px] focus:bg-indigo-600 rounded-lg"
-                        style={{
-                            backgroundImage: `url("./paint.avif")`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                        }}
-                    ></button>
-                    </div>
-                    {/* brush colors*/}
-                    <ul className="w-[300px] h-full sm:flex hidden flex flex-wrap">
-                        {brushColors.map((color) => (
-                            <li
-                                key={color}
-                                style={{ backgroundColor: color }}
-                                className={`w-[30px] h-[30px] bg-${color}`}
-                            ></li>
-                        ))}
-                    </ul>
+                
+                <ColorMenu/>
 
                     {/* brush type */}
                     <div className="w-full h-14 rounded-sm gap-1 flex items-center justify-around">
