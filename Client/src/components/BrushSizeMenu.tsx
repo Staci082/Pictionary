@@ -21,17 +21,17 @@ const PopupMenu: React.FC = () => {
     <div className="relative sm:hidden flex">
       <button
         onClick={toggleMenu}
-        className="text-white h-10 w-10 flex items-center rounded-lg justify-center flex w-10  focus:bg-indigo-600 cursor-pointer"
+        className="text-white w-10 flex items-center rounded-lg justify-center flex w-10  focus:bg-indigo-600 cursor-pointer"
       >
         {<FaCircle size={selectedOption}/>}
       </button>
       {isOpen && (
-        <ul className="absolute bottom-0 left-0 w-10 bg-indigo-600 rounded">
+        <ul className="absolute bottom-[-6px] left-0 w-12 bg-indigo-600 rounded">
           {options.map((option, index) => (
             <li
               key={index}
               onClick={() => selectOption(option)}
-              className="px-4 py-2 w-full h-10 text-white flex flex-col justify-center items-center hover:bg-indigo-400 hover:rounded cursor-pointer"
+              className="px-4 py-4 w-full  text-white flex flex-col justify-center items-center hover:bg-indigo-400 hover:rounded cursor-pointer"
             >
               <FaCircle size={option} />
             </li>

@@ -7,9 +7,9 @@ export default function Players() {
                     <p className="text-sm">Points: 100</p>
                 </div>
                 <img
-                    src="/face3.avif"
+                    src="/face4.avif"
                     alt="player avatar"
-                    className="w-8 absolute right-2 top-2 rounded-lg"
+                    className="w-10 hover:scale-150 absolute right-1 top-1 rounded-lg"
                 />
                 
                 </div>
