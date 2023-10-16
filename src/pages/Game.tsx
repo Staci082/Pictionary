@@ -31,8 +31,10 @@ function Game() {
                         <Players />
                     </div>
                     <Canvas />
+
+
                     {/* chat */}
-                    <div className="w-[500px] relative lg:flex hidden h-96 bg-blue-200">
+                    <div className="w-[500px] relative lg:flex hidden h-96 py-5 bg-blue-200">
                         <Chat  />
                     </div>
 
@@ -47,7 +49,7 @@ function Game() {
                             <Players />
                         </div>
                         {/* mobile chat */}
-                        <div className=" w-2/3 relative lg:hidden rounded-sm h-64 bg-blue-200">
+                        <div className=" w-2/3 relative lg:hidden rounded-sm h-64 mt-1 bg-blue-200">
                             <Chat />
                         </div>
                     </div>

@@ -35,10 +35,10 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
     return (
         <>
             {/* brush colors */}
-            <div className="flex gap-3 relative">
+            <div className="flex gap-3 relative items-center">
                 <div
                     style={{ backgroundColor: selectedColor || "black" }}
-                    className=" h-[38px] w-[38px]"
+                    className=" h-[38px] w-[38px] rounded-lg"
                 ></div>
 
                 {/* color menu button */}
@@ -55,7 +55,7 @@ const ColorMenu: React.FC<ColorMenuProps> = ({ onColorSelect }) => {
                 {/* color menu pop up */}
                 {isOpen && (
                     <ul
-                        className="absolute bg-indigo-600 bottom-[53px] w-auto h-auto p-3 flex items-center bg-indigo-600 rounded"
+                        className="absolute bottom-[53px] w-auto h-auto p-3 flex items-center bg-indigo-600 rounded"
                     >
                         {brushColors.map((option, index) => (
                             <li
