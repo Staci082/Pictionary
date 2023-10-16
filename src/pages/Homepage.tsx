@@ -1,12 +1,18 @@
-import { useState } from "react";
+import React,{ useEffect, useState } from "react";
 import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { io, Socket } from "socket.io-client"; // Import 'io' and 'Socket' from 'socket.io-client'
 
-// GETTING PREVIOUS COOKIE DATA INSTEAD OF CURRENT --FIX
-function Homepage() {
+// Define the type for your socket and events if needed
+type SocketType = Socket<{
+    addUser: (data: { username: string; avatar: string }) => void;
+}>;
+
+
+
+const Homepage = () => {
     const navigate = useNavigate();
-    const [cookies, setCookies] = useCookies(["username", "avatar"]);
+    const [socket, setSocket] = useState<SocketType | null>(null); // Specify the type for the socket
     const [username, setUsername] = useState("");
     const [selectedAvatar, setSelectedAvatar] = useState<string>("/face1.avif");
 
@@ -14,13 +20,30 @@ function Homepage() {
         setSelectedAvatar(selected);
     };
 
-    const handleSubmit = (e: { preventDefault: () => void }) => {
+    useEffect(() => {
+        // Initialize the socket connection when the component mounts
+        const socket = io("http://localhost:5172"); // Replace with your server URL
+        setSocket(socket);
+     
+      
+    }, []);
+
+    // Add your username and avatar to the server using the socket connection
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setCookies("username", username);
-        setCookies("avatar", selectedAvatar);
-        console.log(cookies);
+
+        // Check if the socket connection is available
+        if (socket) {
+            // Emit the "addUser" event with username and selectedAvatar
+            socket.emit('addUser', { username, avatar: selectedAvatar });
+          }
+
+      
+        localStorage.setItem("username", username);
+        localStorage.setItem("avatar", selectedAvatar);
         navigate("/game");
     };
+
 
     return (
         <form className="flex flex-col items-center gap-8">
@@ -44,6 +67,6 @@ function Homepage() {
             </button>
         </form>
     );
-}
+};
 
 export default Homepage;

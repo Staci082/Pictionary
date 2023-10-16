@@ -1,8 +1,18 @@
-import Canvas from "../components/Canvas";
-import Chat from "../components/Chat";
+import React,{useEffect} from "react";
+import Canvas from "../components/Canvas/Canvas";
+import Chat from "../components/Chat/Chat";
 import Players from "../components/Players";
 
 function Game() {
+    useEffect(() => {
+        // Fetch the list of online users
+        fetch('http://localhost:5172/onlineUsers')
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+          });
+      }, []);
+ 
     return (
         <>
             <div className="w-screen min-h-screen py-8 flex flex-col items-center justify-center gap-4">
@@ -23,7 +33,7 @@ function Game() {
                     <Canvas />
                     {/* chat */}
                     <div className="w-[500px] relative lg:flex hidden h-96 bg-blue-200">
-                        <Chat />
+                        <Chat  />
                     </div>
 
 

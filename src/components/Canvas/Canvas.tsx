@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+
+import React,{ useState, useEffect } from "react";
 import BrushTypeMenu from "./BrushTypeMenu";
 import BrushSizeMenu from "./BrushSizeMenu";
 import ColorMenu from "./ColorMenu";
-import useOnDraw from "../hooks/useOnDraw";
+import useOnDraw from "../../hooks/useOnDraw";
 
 function Canvas() {
     const [selectedColor, setSelectedColor] = useState<string>("black");
@@ -40,8 +41,6 @@ function Canvas() {
         prevPoint: { x: number; y: number } | null
     ) {
         // retrieve selected brush size and parse
-
-        // Retrieve selected brush size and parse
         const brushSize = parseInt(selectedBrushSize, 10 / 2) || 5;
         drawLine(prevPoint, point, ctx, brushSize);
     }
