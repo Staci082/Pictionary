@@ -1,5 +1,5 @@
 
-import React,{ useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import BrushTypeMenu from "./BrushTypeMenu";
 import BrushSizeMenu from "./BrushSizeMenu";
 import ColorMenu from "./ColorMenu";

@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import { useState } from "react";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) => void; }) {

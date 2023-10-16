@@ -1,4 +1,4 @@
-import React from "react";
+
 import ChatInput from "./ChatInput";
 
 function Chat() {
