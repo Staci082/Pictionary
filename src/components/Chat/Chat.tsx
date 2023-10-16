@@ -13,8 +13,10 @@ function Chat() {
       return;
     }
 
+    const userMessage = `You: ${message}`;
+
     // Append your message to the chat history
-    setChatHistory([...chatHistory, "You: " + message]);
+    setChatHistory([...chatHistory, userMessage]);
 
     // Emit the message to the server
     socket.emit("send_message", { message });
@@ -30,7 +32,7 @@ function Chat() {
 
   return (
     <>
-      <div className="w-[96%] h-[75%] absolute top-[8px] right-0 left-0 m-auto bg-white rounded-md">
+      <div className="w-[96%] h-[75%] flex flex-col justify-end overflow-auto hover:overflow-y-scroll px-1 absolute top-[8px] right-0 left-0 m-auto bg-white rounded-md">
         {chatHistory.map((chat, index) => (
           <div key={index}>{chat}</div>
         ))}
@@ -47,12 +49,12 @@ function Chat() {
             sendMessage();
           }
         }}
+        maxLength={20}
       />
-      <button 
-      onClick={sendMessage}
-      className="w-5 h-5 bg-blue-500 absolute bottom-3 right-5"></button>
+      <button onClick={sendMessage} className="w-5 h-5 bg-blue-500 absolute bottom-3 right-5"></button>
     </>
   );
 }
+
 
 export default Chat;
