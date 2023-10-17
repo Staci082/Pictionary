@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import Canvas from "../components/Canvas/Canvas";
 import Chat from "../components/Chat/Chat";
 import Players from "../components/Players";

@@ -16,17 +16,31 @@ function MessageList({ chatHistory }: MessageListProps) {
 }
 
 
-// single message
+// Message component
 interface MessageProps {
-  message: { name: string; id: string; text: string };
+  message: { name: string; id: string; text: string; type?: "user" | "message" };
 }
 
 function Message({ message }: MessageProps) {
   const isCurrentUser = message.name === localStorage.getItem("username");
 
+  let textColor = "black";
+  let textPrefix = "";
+
+  if (message.type === "user") {
+    textColor = "green"; 
+    textPrefix = ""
+  } else {
+    if (!isCurrentUser) {
+      textColor = "red";
+    }
+
+    textPrefix = isCurrentUser ? "You:" : `${message.name}:`;
+  }
+
   return (
-    <p key={message.id}>
-      {isCurrentUser ? 'You' : message.name}: {message.text}
+    <p key={message.id} style={{ color: textColor }}>
+      {textPrefix} {message.text}
     </p>
   );
 }

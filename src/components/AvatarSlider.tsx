@@ -3,18 +3,18 @@ import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) => void; }) {
     const avatars: string[] = [
-        "/face1.avif",
-        "/face2.avif",
-        "/face3.avif",
-        "/face4.avif",
-        "/face5.avif",
-        "/face6.avif",
-        "/face7.avif",
-        "/face8.avif",
-        "/face9.avif",
-        "/face10.avif",
-        "/face11.avif",
-        "/face12.avif"
+        "face1.avif",
+        "face2.avif",
+        "face3.avif",
+        "face4.avif",
+        "face5.avif",
+        "face6.avif",
+        "face7.avif",
+        "face8.avif",
+        "face9.avif",
+        "face10.avif",
+        "face11.avif",
+        "face12.avif"
     ];
 
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -43,7 +43,7 @@ function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) =
                 />
                 <div
                     style={{
-                        backgroundImage: `url(${avatars[currentIndex]})`,
+                        backgroundImage: `url("/${avatars[currentIndex]}")`,
                         cursor: "pointer", 
                     }}
                     className="border-2 h-[150px] w-[150px] rounded-2xl"
