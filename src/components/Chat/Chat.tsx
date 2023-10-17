@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SocketProp } from "../../context/SocketProp";
 import ChatInput from "./ChatInput";
-import { MessageList } from "./ChatMessages"
+import MessageList from "./ChatMessages";
 
 function Chat({ socket }: SocketProp) {
   const [message, setMessage] = useState<string>("");

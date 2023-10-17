@@ -24,13 +24,16 @@ export default function Players({ socket }: SocketProp) {
     return (
         <>
             {onlineUsers.map((user) => (
-                <div className="my-1 flex items-center justify-center relative rounded-sm h-12 bg-blue-200">
-                    <div key={user.id}>
+                <div className="my-1 flex items-center justify-center rounded-sm h-12 bg-blue-200">
+                    <div key={user.id} className="flex items-center justify-between w-full mx-2">
+                    <div className="sm:w-10 w-7">
+                        
+                    </div>
                         <div className="flex flex-col text-center">
-                            <b className="text-sm">{user.username}</b>
-                            <p className="text-sm">Points: 100</p>
+                            <b className="sm:text-sm text-xs">{user.username}</b>
+                            <p className="sm:text-sm text-xs">Points: 100</p>
                         </div>
-                        <img src={user.avatar} alt="player avatar" className="w-10 hover:scale-150 absolute right-1 top-1 rounded-xl" />
+                        <img src={user.avatar} alt="player avatar" className="sm:w-10 w-7 hover:scale-150 sm:rounded-xl rounded-lg" />
                     </div>
                 </div>
             ))}

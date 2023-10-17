@@ -45,7 +45,7 @@ function Game({ socket }: SocketProp) {
                        
                         </div>
                         {/* mobile chat */}
-                        <div className=" w-2/3 relative lg:hidden rounded-sm h-96 mt-1 bg-blue-200">
+                        <div className=" w-2/3 relative lg:hidden rounded-sm h-96  mt-1 bg-blue-200">
                             <Chat socket={socket} />
                         </div>
                     </div>
