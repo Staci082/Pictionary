@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const { Server } = require("socket.io");
-const { addUser, removeUser, getUser } = require("./users");
+const { addUser, removeUser, getUser, onlineUsers } = require("./users");
 
 const app = express();
 app.use(cors());
@@ -18,36 +18,27 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
     socket.on("newUser", ({ username, avatar, socketID }) => {
-        const { error, user } = addUser({ id: socketID, avatar, username });
+        const { error, user } = addUser({ id: socketID, username, avatar });
+
         if (error) {
             console.log(error);
         } else {
             console.log("new user:", user);
             socket.broadcast.emit("userJoined", {
               text: `${user.username} has joined the game`,
-              type: "user", 
             });
         }
     });
 
     socket.on("message", (data) => {
-        socket.broadcast.emit("messageResponse",  {
-          text: data,
-          type: "message"
-        });
+        socket.broadcast.emit("messageResponse", data);
+        console.log(onlineUsers)
     });
-    socket.on("disconnect", () => {
-      const user = getUser(socket.id); 
 
-      if (user) {
-        console.log("user left:", user);
-          socket.broadcast.emit("userLeft", {
-              text: `${user.username} has left the game`,
-              type: "user", 
-          });
-          removeUser(socket.id);
-      }
-  });
+    socket.on("disconnect", () => {
+        console.log("🔥: A user disconnected");
+        removeUser(socket.id);
+    });
 });
 
 server.listen(5172, () => {
