@@ -14,10 +14,7 @@ export default function Players({ socket }: SocketProp) {
     useEffect(() => {
         socket.on("onlineUsers", (users: User[]) => {
             setOnlineUsers(users);
-
         });
-
-        // ...
     }, [socket]);
 
     useEffect(() => {
@@ -26,23 +23,17 @@ export default function Players({ socket }: SocketProp) {
 
     return (
         <>
-               {onlineUsers.map((user) => (
-            <div className="my-1 flex items-center justify-center relative rounded-sm h-12 bg-blue-200">
-         
+            {onlineUsers.map((user) => (
+                <div className="my-1 flex items-center justify-center relative rounded-sm h-12 bg-blue-200">
                     <div key={user.id}>
                         <div className="flex flex-col text-center">
                             <b className="text-sm">{user.username}</b>
                             <p className="text-sm">Points: 100</p>
                         </div>
-                        <img
-                            src={user.avatar}
-                            alt="player avatar"
-                            className="w-10 hover:scale-150 absolute right-1 top-1 rounded-xl"
-                        />
+                        <img src={user.avatar} alt="player avatar" className="w-10 hover:scale-150 absolute right-1 top-1 rounded-xl" />
                     </div>
-                    </div>
-                ))}
-          
+                </div>
+            ))}
         </>
     );
 }
