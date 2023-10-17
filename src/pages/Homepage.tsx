@@ -18,7 +18,7 @@ function Homepage ({ socket }: SocketProp) {
         localStorage.setItem("username", username);
         localStorage.setItem("avatar", selectedAvatar);
 
-        socket.emit('newUser', {  selectedAvatar, username, socketID: socket.id });
+        socket.emit('newUser', {  username, avatar: selectedAvatar, socketID: socket.id });
         navigate("/game");
     };
 
