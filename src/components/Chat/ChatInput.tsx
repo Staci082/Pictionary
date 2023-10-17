@@ -11,7 +11,7 @@ function ChatInput({ message, setMessage, sendMessage }: ChatInputProps) {
                 type="text"
                 name="chatInput"
                 placeholder="Type your guess here.."
-                className="w-[96%] absolute bottom-[8px] right-0 left-0 rounded-md outline-none text-xs sm:text-sm ms:text-md p-2 m-auto h-8"
+                className="w-[96%] absolute bottom-[8px] right-0 left-0 rounded-md outline-none text-xs sm:text-sm md:text-md p-2 m-auto h-8"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => {

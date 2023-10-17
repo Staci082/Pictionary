@@ -5,7 +5,9 @@ interface MessageListProps {
 
 function MessageList({ chatHistory }: MessageListProps) {
   return (
-    <div className="w-[96%] h-[85%] flex flex-col justify-end overflow-auto hover:overflow-y-scroll absolute top-[8px] right-0 left-0 m-auto bg-white rounded-md">
+    <div 
+    data-te-perfect-scrollbar-init="true"
+    className="w-[96%] h-[85%] flex flex-col justify-end overflow-auto hover:overflow-y-scroll absolute top-[8px] right-0 left-0 m-auto bg-white rounded-md">
       <div className="max-h-[85%] min-h">
       {chatHistory.map((message, id) => (
         <Message key={id} message={message} isEven={id % 2 === 0} />
