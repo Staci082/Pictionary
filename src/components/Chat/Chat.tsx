@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { SocketProp } from "../../context/SocketProp";
 import ChatInput from "./ChatInput";
 import { MessageList } from "./ChatMessages";
-
 function Chat({ socket }: SocketProp) {
     const [message, setMessage] = useState<string>("");
     const [chatHistory, setChatHistory] = useState<{ name: string; id: string; text: string}[]>([]);
@@ -35,6 +34,7 @@ function Chat({ socket }: SocketProp) {
         });
         socket.on("userLeft", (data) => {
             setChatHistory([...chatHistory, { ...data}]);
+            console.log(chatHistory)
         });
     }, [socket, chatHistory]);
 

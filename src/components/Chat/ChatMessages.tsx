@@ -1,5 +1,4 @@
 
-
 // message list
 interface MessageListProps {
   chatHistory: { name: string; id: string; text: string }[];
@@ -29,7 +28,6 @@ function Message({ message }: MessageProps) {
 
   if (message.type === "user") {
     textColor = "green"; 
-    textPrefix = ""
   } else {
     if (!isCurrentUser) {
       textColor = "red";
@@ -44,5 +42,4 @@ function Message({ message }: MessageProps) {
     </p>
   );
 }
-
 export { MessageList };
