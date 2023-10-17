@@ -7,13 +7,13 @@ import { SocketProp } from "../context/SocketProp";
 
 
 function Game({ socket }: SocketProp) {
-    useEffect(() => {
-        fetch("http://localhost:5172/onlineUsers")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch("http://localhost:5172/onlineUsers")
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             console.log(data);
+    //         });
+    // }, []);
 
     return (
         <>
