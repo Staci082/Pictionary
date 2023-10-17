@@ -28,10 +28,11 @@ const getUser = (id) => {
     const user = onlineUsers.find((user) => user.id === id);
 
     if (!user) {
-        return { error: "User not found" };
+        return null; // Return null if user not found
     }
 
-    return { user };
+    return user; // Return the user directly
 };
+
 
 module.exports = { addUser, removeUser, getUser, onlineUsers}

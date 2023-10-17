@@ -23,22 +23,31 @@ io.on("connection", (socket) => {
         if (error) {
             console.log(error);
         } else {
-            console.log("new user:", user);
+            console.log(`user ${user.username} connected`);
             socket.broadcast.emit("userJoined", {
                 text: `${user.username} has joined the game`,
+                color: 'text-green-600'
             });
         }
     });
 
 
+
     socket.on("message", (data) => {
         socket.broadcast.emit("messageResponse", data);
         console.log(onlineUsers);
+        // const beep = getUser(data.id);   //  USER ID BEING FOUND BUT NOT IN GETUSER? TRY SOMETHING ELSE
+        // if (!beep) {
+        //     console.log(`User not found for ID: ${data.id}`);
+        // }
     });
 
-    socket.on("disconnect", () => {
-        console.log("A user disconnected");
-        removeUser(socket.id);
+    socket.on("disconnect", (socket) => {
+        const user = getUser(socket.id);
+        if (user) {
+            console.log(`${user.username} user disconnected`);
+            removeUser(socket.id);
+        }
     });
 });
 const emitOnlineUsers = () => {
