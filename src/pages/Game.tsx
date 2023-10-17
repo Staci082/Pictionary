@@ -1,25 +1,25 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import Canvas from "../components/Canvas/Canvas";
 import Chat from "../components/Chat/Chat";
 import Players from "../components/Players";
+import { SocketProp } from "../context/SocketProp";
 
-function Game() {
+
+
+function Game({ socket }: SocketProp) {
     useEffect(() => {
-        // Fetch the list of online users
-        fetch('http://localhost:5172/onlineUsers')
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data)
-          });
-      }, []);
- 
+        fetch("http://localhost:5172/onlineUsers")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            });
+    }, []);
+
     return (
         <>
             <div className="w-screen min-h-screen py-8 flex flex-col items-center justify-center gap-4">
                 {/* header */}
-                <div className="w-[90%] h-12 relative flex items-center justify-center bg-blue-200 rounded-sm">
-                    Word
-                </div>
+                <div className="w-[90%] h-12 relative flex items-center justify-center bg-blue-200 rounded-sm">Word</div>
 
                 {/* main container */}
                 <div className="w-[90%] flex flex-col gap-4 lg:flex-row">
@@ -30,14 +30,14 @@ function Game() {
                         <Players />
                         <Players />
                     </div>
-                    <Canvas />
 
+                    {/* <canvas */}
+                    <Canvas />
 
                     {/* chat */}
                     <div className="w-[500px] relative lg:flex hidden h-96 py-5 bg-blue-200">
-                        <Chat  />
+                        <Chat socket={socket} />
                     </div>
-
 
                     {/* mobile container */}
                     <div className="flex gap-4 lg:hidden">
@@ -49,8 +49,8 @@ function Game() {
                             <Players />
                         </div>
                         {/* mobile chat */}
-                        <div className=" w-2/3 relative lg:hidden rounded-sm h-64 mt-1 bg-blue-200">
-                            <Chat />
+                        <div className=" w-2/3 relative lg:hidden rounded-sm h-96 mt-1 bg-blue-200">
+                            <Chat socket={socket} />
                         </div>
                     </div>
                 </div>

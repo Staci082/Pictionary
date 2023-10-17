@@ -1,15 +1,10 @@
-import React,{ useEffect, useState } from "react";
+import React,{ useState } from "react";
 import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
-
-// // Define the type for your socket and events if needed
-// type SocketType = Socket<{
-//     addUser: (data: { username: string; avatar: string }) => void;
-// }>;
+import { SocketProp } from "../context/SocketProp";
 
 
-
-const Homepage = () => {
+function Homepage ({ socket }: SocketProp) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [selectedAvatar, setSelectedAvatar] = useState<string>("/face1.avif");
@@ -18,19 +13,13 @@ const Homepage = () => {
         setSelectedAvatar(selected);
     };
 
-
-    // Add your username and avatar to the server using the socket connection
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         localStorage.setItem("username", username);
         localStorage.setItem("avatar", selectedAvatar);
+        socket.emit('newUser', { username, socketID: socket.id });
         navigate("/game");
 
-        // // Check if the socket connection is available
-        // if (socket) {
-        //     // Emit the "addUser" event with username and selectedAvatar
-        //     socket.emit('addUser', { username, avatar: selectedAvatar });
-        //   }
     };
 
 
