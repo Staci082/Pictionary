@@ -1,6 +1,6 @@
 // message list
 interface MessageListProps {
-  chatHistory: { name: string; id: string; text: string }[];
+  chatHistory: { name: string; id: string; text: string; color: string }[];
 }
 
 function MessageList({ chatHistory }: MessageListProps) {
@@ -19,18 +19,19 @@ function MessageList({ chatHistory }: MessageListProps) {
 
 // single message
 interface MessageProps {
-  message: { name: string; id: string; text: string };
+  message: { name: string; id: string; text: string; color: string };
   isEven: boolean;
 }
 
 function Message({ message, isEven }: MessageProps) {
   const isCurrentUser = message.name === localStorage.getItem("username");
   const messageClass = isEven ? 'px-1' : 'bg-blue-100 px-1';
-
+  const colorClass = message.color;
+  const displayName = isCurrentUser ? 'You' : `${message.name}`;
   return (
-    <p key={message.id} className={messageClass}>
-      {isCurrentUser ? 'You' : message.name }: {message.text}
-    </p>
+    <p key={message.id} className={`${messageClass} ${colorClass}`}>
+    { displayName === undefined ? message.text : `${displayName}: ${message.text}` }
+  </p>
   );
 }
 

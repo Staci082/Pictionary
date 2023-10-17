@@ -26,8 +26,13 @@ export default function Players({ socket }: SocketProp) {
             {onlineUsers.map((user) => (
                 <div className="my-1 flex items-center justify-center rounded-sm h-12 bg-blue-200">
                     <div key={user.id} className="flex items-center justify-between w-full mx-2">
-                    <div className="sm:w-10 w-7">
-                        
+                    <div 
+                    style={{
+                        backgroundImage:`url("./pencil.avif")`,
+                        backgroundSize: "contain",
+                        backgroundRepeat: "no-repeat",
+                    }}
+                    className="sm:w-10 sm:h-10 w-7 h-7">
                     </div>
                         <div className="flex flex-col text-center">
                             <b className="sm:text-sm text-xs">{user.username}</b>

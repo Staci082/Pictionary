@@ -31,6 +31,10 @@ function Homepage ({ socket }: SocketProp) {
                 placeholder="Enter your name.."
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onInvalid={(e) => {
+                    e.preventDefault();
+                    // Display a custom error message or set a state to show an error message
+                }}
                 className="bg-transparent p-2 w-[300px] border-solid border-white border-2 rounded-xl outline-none text-white text-center"
                 required
             />
