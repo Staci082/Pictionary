@@ -1,27 +1,61 @@
-# React + TypeScript + Vite
+# Online Multiplayer Pictionary Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to this Online Multiplayer Pictionary Game, "Cosmic Doodles", a fun and interactive online game where players can draw, guess, and have a great time together. This project is built using the MERN stack (MongoDB, Express.js, React, Node.js), TypeScript, and utilizes the power of socket.io for real-time communication.
 
-Currently, two official plugins are available:
+! You can play the game [here](https://cosmic-doodles.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [How to Play](#how-to-play)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- **Multiplayer Gameplay:** Enjoy a real-time multiplayer gaming experience with your friends.
+- **Four Language Rooms:** Choose from rooms in English, French, Dutch, and Spanish.
+- **Drawing and Guessing:** Take turns drawing words or guessing the drawings created by others.
+- **Scoring System:** Earn points for correctly guessing words and compete for the highest score.
+- **Real-time Communication:** Achieve seamless communication through socket.io.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Technologies Used
+
+- **Frontend:**
+  - React
+  - TypeScript
+  - Socket.io-client for real-time communication
+  - Styling with Tailwind
+
+- **Backend:**
+  - Node.js
+  - Express.js
+  - TypeScript
+  - Socket.io for real-time game synchronization
+
+- **Deployment:**
+  - Vercel (frontend)
+  - Render (backend)
+
+- **Other Tools:**
+  - Git and GitHub for version control
+
+
+## How to Play
+
+Log in by choosing a username and avatar.
+
+Choose a room with your preferred language.
+
+Wait for other players to join the room. 
+
+You can doodle while you are waiting.
+
+When it's your turn, select a word and start drawing.
+
+Other players will try to guess your drawing.
+
+Points are awarded for correct guesses.
+
+Enjoy the game and compete for the highest score!

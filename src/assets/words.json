@@ -1,0 +1,238 @@
+{
+    "words": [
+        {
+            "english": "Elephant",
+            "french": "Éléphant",
+            "dutch": "Olifant",
+            "spanish": "Elefante"
+        },
+        {
+            "english": "Butterfly",
+            "french": "Papillon",
+            "dutch": "Vlinder",
+            "spanish": "Mariposa"
+        },
+        {
+            "english": "Flower",
+            "french": "Fleur",
+            "dutch": "Bloem",
+            "spanish": "Flor"
+        },
+        {
+            "english": "House",
+            "french": "Maison",
+            "dutch": "Huis",
+            "spanish": "Casa"
+        },
+        {
+            "english": "Sunshine",
+            "french": "Ensoleillement",
+            "dutch": "Zonneschijn",
+            "spanish": "Brillo del sol"
+        },
+        {
+            "english": "Mountain",
+            "french": "Montagne",
+            "dutch": "Berg",
+            "spanish": "Montaña"
+        },
+        {
+            "english": "Sailboat",
+            "french": "Voilier",
+            "dutch": "Zeilboot",
+            "spanish": "Velero"
+        },
+        {
+            "english": "Giraffe",
+            "french": "Girafe",
+            "dutch": "Giraffe",
+            "spanish": "Jirafa"
+        },
+        {
+            "english": "Waterfall",
+            "french": "Cascade",
+            "dutch": "Waterval",
+            "spanish": "Cascada"
+        },
+        {
+            "english": "Rainbow",
+            "french": "Arc-en-ciel",
+            "dutch": "Regenboog",
+            "spanish": "Arcoíris"
+        },
+        {
+            "english": "Telescope",
+            "french": "Télescope",
+            "dutch": "Telescoop",
+            "spanish": "Telescopio"
+        },
+        {
+            "english": "Adventure",
+            "french": "Aventure",
+            "dutch": "Avontuur",
+            "spanish": "Aventura"
+        },
+        {
+            "english": "Celebration",
+            "french": "Célébration",
+            "dutch": "Viering",
+            "spanish": "Celebración"
+        },
+        {
+            "english": "Fireworks",
+            "french": "Feux d'artifice",
+            "dutch": "Vuurwerk",
+            "spanish": "Fuegos artificiales"
+        },
+        {
+            "english": "Landscape",
+            "french": "Paysage",
+            "dutch": "Landschap",
+            "spanish": "Paisaje"
+        },
+        {
+            "english": "Watercolor",
+            "french": "Aquarelle",
+            "dutch": "Waterverf",
+            "spanish": "Acuarela"
+        },
+        {
+            "english": "Painting",
+            "french": "Peinture",
+            "dutch": "Schilderij",
+            "spanish": "Pintura"
+        },
+        {
+            "english": "Friendship",
+            "french": "Amitié",
+            "dutch": "Vriendschap",
+            "spanish": "Amistad"
+        },
+        {
+            "english": "Exploration",
+            "french": "Exploration",
+            "dutch": "Verkenning",
+            "spanish": "Exploración"
+        },
+        {
+            "english": "Inspiration",
+            "french": "Inspiration",
+            "dutch": "Inspiratie",
+            "spanish": "Inspiración"
+        },
+        {
+            "english": "Meditation",
+            "french": "Méditation",
+            "dutch": "Meditatie",
+            "spanish": "Meditación"
+        },
+        {
+            "english": "Education",
+            "french": "Éducation",
+            "dutch": "Onderwijs",
+            "spanish": "Educación"
+        },
+        {
+            "english": "Serenity",
+            "french": "Sérénité",
+            "dutch": "Kalmte",
+            "spanish": "Serenidad"
+        },
+        {
+            "english": "Dolphin",
+            "french": "Dauphin",
+            "dutch": "Dolfijn",
+            "spanish": "Delfín"
+        },
+        {
+            "english": "Serenade",
+            "french": "Sérénade",
+            "dutch": "Serenade",
+            "spanish": "Serenata"
+        },
+        {
+            "english": "Dragonfly",
+            "french": "Libellule",
+            "dutch": "Libelle",
+            "spanish": "Libélula"
+        },
+        {
+            "english": "Whirlwind",
+            "french": "Tourbillon",
+            "dutch": "Wervelwind",
+            "spanish": "Torbellino"
+        },
+        {
+            "english": "Watermelon",
+            "french": "Pastèque",
+            "dutch": "Watermeloen",
+            "spanish": "Sandía"
+        },
+        {
+            "english": "Moonlight",
+            "french": "Clair de lune",
+            "dutch": "Maanlicht",
+            "spanish": "Luz de luna"
+        },
+        {
+            "english": "Renaissance",
+            "french": "Renaissance",
+            "dutch": "Renaissance",
+            "spanish": "Renacimiento"
+        },
+        {
+            "english": "Imagination",
+            "french": "Imagination",
+            "dutch": "Verbeelding",
+            "spanish": "Imaginación"
+        },
+        {
+            "english": "Appreciation",
+            "french": "Appréciation",
+            "dutch": "Waardering",
+            "spanish": "Apreciación"
+        },
+        {
+            "english": "Happiness",
+            "french": "Bonheur",
+            "dutch": "Geluk",
+            "spanish": "Felicidad"
+        },
+        {
+            "english": "Elegance",
+            "french": "Élégance",
+            "dutch": "Elegance",
+            "spanish": "Elegancia"
+        },
+        {
+            "english": "Affection",
+            "french": "Affection",
+            "dutch": "Genegenheid",
+            "spanish": "Afecto"
+        },
+        {
+            "english": "Whisper",
+            "french": "Chuchotement",
+            "dutch": "Fluisteren",
+            "spanish": "Susurro"
+        },
+        {
+            "english": "Harmony",
+            "french": "Harmonie",
+            "dutch": "Harmonie",
+            "spanish": "Armonía"
+        },
+        {
+            "english": "Liberation",
+            "french": "Libération",
+            "dutch": "Bevrijding",
+            "spanish": "Liberación"
+        },
+        {
+            "english": "Brilliance",
+            "french": "Brillance",
+            "dutch": "Briljant",
+            "spanish": "Brillante"
+        }
+    ]
+}
