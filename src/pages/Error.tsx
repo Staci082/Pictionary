@@ -1,4 +1,4 @@
-import "../assets/starsAnimation.css";
+import StarsAnimation from "../components/StarsAnimation"
 
 function Error() {
     return (
@@ -8,11 +8,7 @@ function Error() {
                 404 <br /> Page Not Found
             </h1>
             <img src="/404.gif" alt="alien" />
-            <div className="w-full absolute ">
-                <div id="stars"></div>
-                <div id="stars2"></div>
-                <div id="stars"></div>
-            </div>
+            <StarsAnimation/>
             </div>
         </>
     );

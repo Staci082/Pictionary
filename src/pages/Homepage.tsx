@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
 import { SocketProp } from "../context/SocketProp";
-import "../assets/starsAnimation.css";
+import StarsAnimation from "../components/StarsAnimation"
 
 function Homepage({ socket }: SocketProp) {
     const navigate = useNavigate();
@@ -46,11 +46,7 @@ function Homepage({ socket }: SocketProp) {
                     PLAY!
                 </button>
             </form>
-            <div className="w-full absolute">
-                <div id="stars"></div>
-                <div id="stars2"></div>
-                <div id="stars"></div>
-            </div>
+         <StarsAnimation/>
             </div>
         </>
     );
