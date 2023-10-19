@@ -1,6 +1,7 @@
 
 import Homepage from "./pages/Homepage";
 import Game from "./pages/Game";
+import Error from "./pages/Error";
 import { Routes, Route } from "react-router-dom";
 import io from "socket.io-client";
 
@@ -13,6 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage socket={socket}/>} />
                 <Route path="/game" element={<Game socket={socket}/>} />
+                <Route path="*" element={<Error/>} />
             </Routes>
         </div>
     );
