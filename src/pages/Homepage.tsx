@@ -3,7 +3,6 @@ import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
 import { SocketProp } from "../context/SocketProp";
 import StarsAnimation from "../components/StarsAnimation";
-import Languages from "../context/LanguageContext";
 
 function Homepage({ socket }: SocketProp) {
     const navigate = useNavigate();
@@ -24,13 +23,13 @@ function Homepage({ socket }: SocketProp) {
     };
 
     
-
+    const inputLanguages: string[] = ["English", "Français", "Nederlands", "Español", "Românesc"];
     return (
         <>
             <div className="overflow-hidden h-screen w-screen relative flex justify-center items-center">
                 <form className="flex flex-col items-center gap-8 text-xl">
-                    <select name="language" id="language" className="outline-none w-[300px] z-10 bg-indigo-700 border-solid border-white border-2  rounded-xl p-2 text-center text-white gap-2">
-                        {Languages.map((language) => (
+                    <select name="language" id="language" className="outline-none w-[300px] z-10 bg-indigo-700 border-solid border-white border-2  rounded-xl p-2 text-center text-white">
+                        {inputLanguages.map((language) => (
                             <option value={language}>{language}</option>
                         ))}
                     </select>

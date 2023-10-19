@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage socket={socket}/>} />
                 <Route path="/game" element={<Game socket={socket}/>} />
-                <Route path="*" element={<Error/>} />
+                <Route element={<Error/>} />
             </Routes>
         </div>
     );
