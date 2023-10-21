@@ -1,4 +1,3 @@
-
 interface User {
     id: string;
     username: string;
@@ -8,41 +7,34 @@ interface User {
 
 const onlineUsers: User[] = [];
 
-
-const addUser = ({ id, username, avatar, points }: User): { user?: User; error?: string }  => {
-    const existingUser = onlineUsers.find((user) => {
-        user.username === username;
-    });
+const addUser = ({ id, username, avatar, points }: User) => {
+    const existingUser = onlineUsers.find((user) => user.username === username);
 
     if (existingUser) {
         return { error: "Username is already taken. Be faster next time." };
     }
 
-    const user = { id, username, avatar, points };
+    const user: User = { id, username, avatar, points };
     onlineUsers.push(user);
     return { user };
 };
 
-const removeUser = (username: string) => {
-    const index = onlineUsers.findIndex((user) => user.username === username);
+const removeUser = (id: string) => {
+    const index = onlineUsers.findIndex((user) => user.id === id);
 
     if (index !== -1) {
         return onlineUsers.splice(index, 1)[0];
     }
 };
 
-// CHECK IF STILL NEEDED
-const getUser = (username: string) => {
-    const user = onlineUsers.find((user) => user.username === username);
+const getUser = (id: string) => {
+    const user = onlineUsers.find((user) => user.id === id);
 
     if (!user) {
-        return null; 
+        return null; // Return null if user not found
     }
-    console.log(onlineUsers)
 
-    return user; 
+    return user; // Return the user directly
 };
-
-
 
 export { addUser, removeUser, getUser, onlineUsers };
