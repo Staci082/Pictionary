@@ -26,13 +26,13 @@ interface MessageProps {
 function Message({ message, isEven }: MessageProps) {
   const isCurrentUser = message.name === localStorage.getItem("username");
   const messageClass = isEven ? 'px-1' : 'bg-blue-100 px-1';
-  const displayName = isCurrentUser ? 'You' : message.name;
+  const colorClass = message.color;
+  const displayName = isCurrentUser ? 'You' : `${message.name}`;
+  console.log(message.color)
   return (
-<p key={message.id} className={`${messageClass}  ${message.color}`}> {/* keep double space in-between or else color doesn't work */}
-
-      {/* checking if message is user sent or server message */}
-      {displayName ? `${displayName}: ${message.text}` : message.text}
-    </p>
+    <p key={message.id} className={`${messageClass} ${colorClass}`}>
+    { displayName === undefined ? message.text : `${displayName}: ${message.text}` }
+  </p>
   );
 }
 

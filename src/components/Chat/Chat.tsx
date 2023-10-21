@@ -8,8 +8,8 @@ function Chat({ socket }: SocketProp) {
     const [chatHistory, setChatHistory] = useState<{ name: string; id: string; text: string; color: string }[]>([]);
 
     const sendMessage = () => {
-        // dont send empty messages
         if (message.trim() === "") {
+            // make
             return;
         }
 
@@ -18,7 +18,7 @@ function Chat({ socket }: SocketProp) {
             text: message,
             name,
             id: `${socket.id}${Math.random()}`,
-            color: "black",
+            color: "black"
         };
 
         setChatHistory([...chatHistory, newMessage]);
@@ -27,9 +27,10 @@ function Chat({ socket }: SocketProp) {
     };
 
     useEffect(() => {
-        socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
-        socket.on("userJoined", (data) => setChatHistory([...chatHistory, data]));
-    }, [socket, chatHistory]);
+      socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
+      socket.on("userJoined", (data) => setChatHistory([...chatHistory, data]));
+  }, [socket, chatHistory]);
+  
 
     return (
         <>

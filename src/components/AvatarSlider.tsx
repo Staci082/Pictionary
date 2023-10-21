@@ -6,7 +6,7 @@ function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) =
         const numAvatars = 16;
 
         for (let i = 1; i <= numAvatars; i++) {
-        avatars.push(`avatars/face${i}.avif`);
+        avatars.push(`face${i}.avif`);
         }
 
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -16,6 +16,7 @@ function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) =
         const newIndex = isFirstAvatar ? avatars.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
         onAvatarSelect(avatars[newIndex]);
+
     };
 
     const nextAvatar = () => {
@@ -35,7 +36,7 @@ function AvatarSlider({ onAvatarSelect }: { onAvatarSelect: (selected: string) =
                 />
                 <div
                     style={{
-                        backgroundImage: `url("/${avatars[currentIndex]}")`,
+                        backgroundImage: `url("/avatars/${avatars[currentIndex]}")`,
                         backgroundSize: "contain",
                         cursor: "pointer", 
                     }}
