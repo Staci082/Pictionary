@@ -2,9 +2,7 @@
 import Canvas from "../components/Canvas/Canvas";
 import Chat from "../components/Chat/Chat";
 import Players from "../components/Players";
-import { SocketProp } from "../context/SocketProp";
-
-
+import { SocketProp } from "../props/SocketProp";
 
 function Game({ socket }: SocketProp) {
     // useEffect(() => {
@@ -25,8 +23,7 @@ function Game({ socket }: SocketProp) {
                 <div className="w-[90%] flex flex-col gap-4 lg:flex-row">
                     {/* player info */}
                     <div className="lg:w-[400px] hidden rounded-sm lg:flex lg:flex-col">
-                        <Players socket={socket}/>
-                   
+                        <Players socket={socket} />
                     </div>
 
                     {/* <canvas */}
@@ -41,7 +38,7 @@ function Game({ socket }: SocketProp) {
                     <div className="flex gap-4 lg:hidden">
                         {/* mobile player info */}
                         <div className="w-2/4 lg:hidden">
-                            <Players  socket={socket} />
+                            <Players socket={socket} />
                         </div>
                         {/* mobile chat */}
                         <div className=" w-2/3 relative lg:hidden rounded-sm h-96 mt-1 bg-blue-200">

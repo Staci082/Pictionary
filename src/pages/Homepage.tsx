@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
-import { SocketProp } from "../context/SocketProp";
+import { SocketProp } from "../props/SocketProp";
 import StarsAnimation from "../components/StarsAnimation";
 
 function Homepage({ socket }: SocketProp) {
@@ -22,7 +22,6 @@ function Homepage({ socket }: SocketProp) {
         navigate("/game");
     };
 
-    
     const inputLanguages: string[] = ["English", "Français", "Nederlands", "Español", "Românesc"];
     return (
         <>

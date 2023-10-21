@@ -1,8 +1,4 @@
-interface ChatInputProps {
-    message: string;
-    setMessage: (message: string) => void;
-    sendMessage: () => void;
-}
+import { ChatInputProps } from "../../props/ChatProps";
 
 function ChatInput({ message, setMessage, sendMessage }: ChatInputProps) {
     return (
