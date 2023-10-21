@@ -7,7 +7,7 @@ import StarsAnimation from "../components/StarsAnimation";
 function Homepage({ socket }: SocketProp) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
-    const [selectedAvatar, setSelectedAvatar] = useState<string>("/face1.avif");
+    const [selectedAvatar, setSelectedAvatar] = useState<string>("avatars/face1.avif");
 
     const handleAvatarSelection = (selected: string) => {
         setSelectedAvatar(selected);
