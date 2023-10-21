@@ -27,8 +27,7 @@ function Message({ message, isEven }: MessageProps) {
   const isCurrentUser = message.name === localStorage.getItem("username");
   const messageClass = isEven ? 'px-1' : 'bg-blue-100 px-1';
   const colorClass = message.color;
-  const displayName = isCurrentUser ? 'You' : `${message.name}`;
-  console.log(message.color)
+  const displayName = isCurrentUser ? 'You' : message.name;
   return (
     <p key={message.id} className={`${messageClass} ${colorClass}`}>
     { displayName === undefined ? message.text : `${displayName}: ${message.text}` }
