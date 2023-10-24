@@ -3,9 +3,12 @@ import { SocketProp } from "../../props/SocketProp";
 import ChatInput from "./ChatInput";
 import MessageList from "./ChatMessages";
 
+
 function Chat({ socket }: SocketProp) {
     const [message, setMessage] = useState<string>("");
     const [chatHistory, setChatHistory] = useState<{ name: string; id: string; text: string; color: string }[]>([]);
+
+
 
     const sendMessage = () => {
         // dont send empty messages
@@ -29,6 +32,7 @@ function Chat({ socket }: SocketProp) {
     useEffect(() => {
         socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
         socket.on("userJoined", (data) => setChatHistory([...chatHistory, data]));
+
     }, [socket, chatHistory]);
 
     return (

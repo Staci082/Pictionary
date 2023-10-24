@@ -1,7 +1,7 @@
-import { ChatHistoryProps, MessageProps } from "../../props/ChatProps";
-
+interface ChatHistoryProps {
+    chatHistory: { name: string; id: string; text: string; color: string }[];
+}
 // message list
-
 function MessageList({ chatHistory }: ChatHistoryProps) {
     return (
         <div data-te-perfect-scrollbar-init="true" className="w-[96%] h-[85%] flex flex-col justify-end overflow-auto hover:overflow-y-scroll absolute top-[8px] right-0 left-0 m-auto bg-white rounded-md">
@@ -14,8 +14,13 @@ function MessageList({ chatHistory }: ChatHistoryProps) {
     );
 }
 
-// single message
 
+interface MessageProps {
+    message: { name: string; id: string; text: string; color: string };
+    isEven: boolean;
+}
+
+// single message
 function Message({ message, isEven }: MessageProps) {
     const isCurrentUser = message.name === localStorage.getItem("username");
     const messageClass = isEven ? "px-1" : "bg-blue-100 px-1";
