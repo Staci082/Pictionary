@@ -20,7 +20,10 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@types/lowdb": "^1.0.14",
     "cors": "^2.8.5",
+    "lodash": "^4.17.21",
+    "lowdb": "^6.1.1",
     "socket.io": "^4.7.2"
   }
 }

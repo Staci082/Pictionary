@@ -3,18 +3,19 @@ interface User {
     username: string;
     avatar: string;
     points: number;
+    language: string;
 }
 
 const onlineUsers: User[] = [];
 
-const addUser = ({ id, username, avatar, points }: User) => {
+const addUser = ({ id, username, avatar, points, language }: User) => {
     const existingUser = onlineUsers.find((user) => user.username === username);
 
     if (existingUser) {
         return { error: "Username is already taken. Be faster next time." };
     }
 
-    const user: User = { id, username, avatar, points };
+    const user: User = { id, username, avatar, points, language };
     onlineUsers.push(user);
     return { user };
 };
