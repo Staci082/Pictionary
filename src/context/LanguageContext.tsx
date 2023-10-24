@@ -26,8 +26,9 @@ interface LanguageProviderProps {
 
 // LanguageProvider component to wrap the application with language context
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-    // State to manage the selected language
-    const [selectedLanguage, setSelectedLanguage] = useState("English");
+    // Keep selected language on refresh
+    const currentLanguage = localStorage.getItem("language") || "English";
+    const [selectedLanguage, setSelectedLanguage] = useState<string>(currentLanguage);
 
     // Function to update the selected language
     const updateLanguage = (language: string) => {
