@@ -1,3 +1,6 @@
+import Translations from "../../translations/translations";
+import { useLanguage} from "../../context/LanguageContext";
+
 interface ChatInputProps {
     message: string;
     setMessage: (message: string) => void;
@@ -5,12 +8,15 @@ interface ChatInputProps {
 }
 
 function ChatInput({ message, setMessage, sendMessage }: ChatInputProps) {
+    const { selectedLanguage } = useLanguage();
+    const translations = Translations
+
     return (
         <div>
             <input
                 type="text"
                 name="chatInput"
-                placeholder="Type your guess here.."
+                placeholder={translations[selectedLanguage].enterGuess}
                 className="w-[96%] absolute bottom-[8px] right-0 left-0 rounded-md outline-none text-xs sm:text-sm md:text-md p-2 m-auto h-8"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

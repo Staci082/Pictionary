@@ -3,7 +3,8 @@ import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
 import { SocketProp } from "../props/SocketProp";
 import StarsAnimation from "../components/StarsAnimation";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage, Languages } from "../context/LanguageContext";
+import Translations from "../translations/translations"
 
 function Homepage({ socket }: SocketProp) {
     const navigate = useNavigate();
@@ -25,7 +26,8 @@ function Homepage({ socket }: SocketProp) {
         navigate("/game");
     };
 
-    const inputLanguages: string[] = ["English", "Français", "Nederlands", "Español", "Românesc"];
+
+    const translations = Translations
 
     return (
         <>
@@ -38,7 +40,7 @@ function Homepage({ socket }: SocketProp) {
                         onChange={(e) => updateLanguage(e.target.value)}
                         className="outline-none w-[300px] z-10 bg-indigo-700 border-solid border-white border-2  rounded-xl p-2 text-center text-white"
                     >
-                        {inputLanguages.map((language) => (
+                        {Languages.map((language) => (
                             <option key={language} value={language}>
                                 {language}
                             </option>
@@ -47,7 +49,7 @@ function Homepage({ socket }: SocketProp) {
                     <input
                         type="text"
                         name="username"
-                        placeholder="Enter your name.."
+                        placeholder={translations[selectedLanguage].enterName}
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         onInvalid={(e) => {
@@ -64,7 +66,7 @@ function Homepage({ socket }: SocketProp) {
                         onClick={handleSubmit}
                         className="w-[300px] z-10 bg-violet-600 p-2 border-solid border-white border-2 rounded-xl text-white shadow-xl shadow-indigo-950/50 hover:translate-y-1 hover-bg-indigo-700"
                     >
-                        PLAY!
+                        {translations[selectedLanguage].play}
                     </button>
                 </form>
                 <StarsAnimation />
