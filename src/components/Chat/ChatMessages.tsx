@@ -32,7 +32,7 @@ function Message({ message, isEven }: MessageProps) {
 
     
     const isCurrentUser = message.name === localStorage.getItem("username");
-    const messageClass = isEven ? "px-1" : "bg-blue-100 px-1";
+    const messageClass = isEven ? "px-1" : "bg-blue-100  px-1";
     const colorClass = message.color;
     const displayName = isCurrentUser
     ? translationData && translationData.you

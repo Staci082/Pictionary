@@ -32,7 +32,6 @@ function Chat({ socket }: SocketProp) {
 
     useEffect(() => {
         socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
-        socket.on("userJoined", (data) => setChatHistory([...chatHistory, data]));
     }, [socket, chatHistory]);
 
     // Filter messages based on the selected language
