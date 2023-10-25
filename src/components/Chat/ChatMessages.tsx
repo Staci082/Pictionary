@@ -2,7 +2,7 @@ import Translations from "../../translations/translations";
 import { useLanguage } from "../../context/LanguageContext";
 
 
-interface ChatHistoryProps {
+type ChatHistoryProps = {
     chatHistory: { name: string; id: string; text: string; color: string }[];
 }
 // message list
@@ -20,7 +20,7 @@ function MessageList({ chatHistory }: ChatHistoryProps) {
 }
 
 
-interface MessageProps {
+type MessageProps = {
     message: { name: string; id: string; text: string; color: string };
     isEven: boolean;
 }
@@ -39,7 +39,7 @@ function Message({ message, isEven }: MessageProps) {
     : message.name;
     return (
         <p key={message.id} className={`${messageClass} ${colorClass}`}>
-            {displayName === undefined ? message.text : `${displayName}: ${message.text}`}
+            {displayName === "" ? message.text : `${displayName}: ${message.text}`}
         </p>
     );
 }

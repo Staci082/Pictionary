@@ -4,11 +4,11 @@ import { useLanguage } from "../../context/LanguageContext";
 import MessageList from "./ChatMessages";
 import ChatInput from "./ChatInput";
 
-// Modify the Chat component
+
 function Chat({ socket }: SocketProp) {
     const [message, setMessage] = useState<string>("");
     const [chatHistory, setChatHistory] = useState<{ name: string; id: string; text: string; color: string; language: string }[]>([]);
-    const { selectedLanguage } = useLanguage(); // Get the selected language
+    const { selectedLanguage } = useLanguage();
 
     const sendMessage = () => {
         // Don't send empty messages
@@ -22,7 +22,7 @@ function Chat({ socket }: SocketProp) {
             name,
             id: `${socket.id}${Math.random()}`,
             color: "black",
-            language: selectedLanguage, // Add the selected language
+            language: selectedLanguage, 
         };
 
         setChatHistory([...chatHistory, newMessage]);
@@ -33,7 +33,6 @@ function Chat({ socket }: SocketProp) {
     useEffect(() => {
         socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
         socket.on("userJoined", (data) => setChatHistory([...chatHistory, data]));
-
     }, [socket, chatHistory]);
 
     // Filter messages based on the selected language

@@ -20,13 +20,12 @@ function Homepage({ socket }: SocketProp) {
         e.preventDefault();
         localStorage.setItem("username", username);
         localStorage.setItem("avatar", selectedAvatar);
-        localStorage.setItem("language", selectedLanguage); // Store the selected room in local storage
+        localStorage.setItem("id", socket.id);
+        localStorage.setItem("language", selectedLanguage);
 
-        socket.emit("newUser", { username, avatar: selectedAvatar, socketID: socket.id, language: selectedLanguage });
+        socket.emit("newUser", { username: username, avatar: selectedAvatar, socketID: socket.id, language: selectedLanguage });
         navigate("/game");
     };
-
-
 
     const translations = Translations;
 

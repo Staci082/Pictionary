@@ -1,7 +1,7 @@
-import { SocketProp } from "../props/SocketProp";
+import { SocketProp } from "../../props/SocketProp";
 import { useState, useEffect } from "react";
-import { useLanguage} from "../context/LanguageContext";
-import Translations from "../translations/translations";
+import { useLanguage } from "../../context/LanguageContext";
+import Translations from "../../translations/translations";
 
 // Define the type for a user object
 interface User {
@@ -11,7 +11,6 @@ interface User {
     points: number;
     language: string;
 }
-
 
 export default function Players({ socket }: SocketProp) {
     const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
@@ -23,13 +22,12 @@ export default function Players({ socket }: SocketProp) {
         });
     }, [socket]);
 
-
-    const translations = Translations
+    const translations = Translations;
 
     return (
         <>
             {onlineUsers
-             .filter((user) => user.language === selectedLanguage)
+                .filter((user) => user.language === selectedLanguage)
                 .map((user) => (
                     <div key={user.id} className="my-1 flex items-center justify-center rounded-sm h-12 bg-blue-200">
                         <div className="flex items-center justify-between w-full mx-2">
@@ -43,7 +41,9 @@ export default function Players({ socket }: SocketProp) {
                             ></div>
                             <div className="flex flex-col text-center">
                                 <b className="sm:text-sm text-xs">{user.username}</b>
-                                <p className="sm:text-sm text-xs">{translations[selectedLanguage].points}: {user.points}</p>
+                                <p className="sm:text-sm text-xs">
+                                    {translations[selectedLanguage].points}: {user.points}
+                                </p>
                             </div>
                             <img src={user.avatar} alt="player avatar" className="sm:w-10 w-7 hover:scale-150 sm:rounded-xl rounded-lg" />
                         </div>
