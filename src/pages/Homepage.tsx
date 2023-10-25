@@ -23,7 +23,7 @@ function Homepage({ socket }: SocketProp) {
         localStorage.setItem("id", socket.id);
         localStorage.setItem("language", selectedLanguage);
 
-        socket.emit("newUser", { username: username, avatar: selectedAvatar, socketID: socket.id, language: selectedLanguage });
+        socket.emit("newUser", { username: username, avatar: selectedAvatar, id: socket.id, language: selectedLanguage });
         navigate("/game");
     };
 

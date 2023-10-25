@@ -5,32 +5,6 @@ import Players from "../components/Players/Players";
 import { SocketProp } from "../props/SocketProp";
 
 function Game({ socket }: SocketProp) {
-    // let disconnectTimeout: number | undefined;
-
-    // useEffect(() => {
-    //     const handleUserDisconnect = () => {
-    //         // Handle the user disconnect event
-
-    //         // Clear the existing disconnect timeout if it exists
-    //         if (disconnectTimeout) {
-    //             clearTimeout(disconnectTimeout);
-    //         }
-
-    //         // Set a new timeout to disconnect the user from the server after 10 seconds
-    //         disconnectTimeout = setTimeout(() => {
-    //             // Handle the disconnection logic
-    //             // For example, you can clear the user's data or perform other actions
-    //             // Then disconnect the socket if needed
-    //         }, 10000); // 10 seconds
-    //     };
-
-    //     socket.on("disconnect", handleUserDisconnect);
-
-    //     return () => {
-    //         // Clean up the listener
-    //         socket.off("disconnect", handleUserDisconnect);
-    //     };
-    // }, [socket]);
     return (
         <>
             <div className="w-screen min-h-screen py-8 flex flex-col items-center justify-center gap-4">

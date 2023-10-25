@@ -31,7 +31,7 @@ export default function Players({ socket }: SocketProp) {
                 .map((user) => (
                     <div key={user.id} className="my-1 flex items-center justify-center rounded-sm h-12 bg-blue-200">
                         <div className="flex items-center justify-between w-full mx-2">
-                            <div
+                            <div 
                                 style={{
                                     backgroundImage: `url("./pencil.avif")`,
                                     backgroundSize: "contain",
