@@ -2,7 +2,8 @@ import { createServer } from "http";
 import express, { json } from "express";
 import cors from "cors";
 import { Server } from "socket.io";
-import { addUser, removeUser, getUser, onlineUsers } from "./users";
+import { User, addUser, removeUser} from "./users";
+
 
 const app = express();
 app.use(cors());
@@ -17,47 +18,63 @@ const io = new Server(server, {
     },
 });
 
-io.on("connection", (socket) => {
-    socket.on("newUser", ({ username, avatar, socketID, language }) => {
-        const { error, user } = addUser({ id: socketID, username, avatar, points: 0, language });
 
-        if (error) {
-            console.log(error);
-        } else if (user) {
+export const onlineUsers: User[] = [];
+
+io.on("connection", (socket) => {
+
+
+    socket.on("newUser", (data) => {
+        const { user } = addUser(data);
+
+        if (user) {
             console.log(`user ${user.username} connected`);
 
-            // Join the room associated with the selected language
-            socket.join(language);
+            socket.join(user.language);
 
-            socket.broadcast.to(language).emit("userJoined", {
-                text: `${user.username} has joined the game in the ${language} room`,
-                color: "text-green-600",
+            socket.broadcast.emit("messageResponse", {
+                text: `${user.username} has joined the game`,
+                color: "text-green-800", 
+                id: `${socket.id}${Math.random()}`,
+                language: user.language,
+                name: ""
             });
+
+            onlineUsers.push(user);
         }
     });
 
     socket.on("message", (data) => {
-        // Send the message to the room associated with the selected room (language)
         socket.broadcast.to(data.language).emit("messageResponse", data);
     });
 
     socket.on("disconnect", () => {
-        const user = getUser(socket.id);
+        const user = onlineUsers.find((user) => user.id === socket.id);
         if (user) {
-            console.log(`${user.username} user disconnected`);
-            removeUser(socket.id);
-            // Make the user leave the language room
+            console.log(`${user.username} disconnected`);
+            socket.broadcast.emit("messageResponse", {
+                text: `${user.username} has left the game`,
+                color: "text-red-800", 
+                id: `${socket.id}${Math.random()}`,
+                language: user.language,
+                name: ""
+            });
+            removeUser(user.username);
+            console.log(onlineUsers)
+            // Remove the user from the room but keep them in the online users list
             socket.leave(user.language);
         }
     });
-});
 
+});
 
 const emitOnlineUsers = () => {
     io.emit("onlineUsers", onlineUsers);
 };
 
 setInterval(emitOnlineUsers, 1000);
+
+
 server.listen(5172, () => {
     console.log("SERVER RUNNING");
 });
