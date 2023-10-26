@@ -1,7 +1,6 @@
 # Doodle Martians
 
-Welcome to this Online Multiplayer Pictionary Game, "Doodle Martians", a fun and interactive online game where players can draw, guess, and have a great time together. This project is built using the MERN stack (MongoDB, Express.js, React, Node.js), TypeScript, and utilizes the power of socket.io for real-time communication.
-
+Welcome to this Online Multiplayer Pictionary Game, "Doodle Martians", a fun and interactive online game where players can draw, guess, and have a great time together.
 ! You can play the game [here](https://doodle-martians.vercel.app/)
 
 ## Table of Contents
