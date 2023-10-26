@@ -2,7 +2,9 @@ import { createServer } from "http";
 import express, { json } from "express";
 import cors from "cors";
 import { Server } from "socket.io";
-import { User, addUser, removeUser} from "./users";
+import Database from "./utils/database/database";
+import GameModel from "./models/GameModel";
+import { forEach } from "lodash";
 
 
 const app = express();
@@ -19,18 +21,18 @@ const io = new Server(server, {
 });
 
 
-export const onlineUsers: User[] = [];
+const gameModel = new GameModel();
 
 io.on("connection", (socket) => {
 
 
     socket.on("newUser", (data) => {
-        const { user } = addUser(data);
+        const { user } = Database.addPlayer(data);
 
         if (user) {
             console.log(`user ${user.username} connected`);
-
-            socket.join(user.language);
+            // socket.join(user.language);
+            gameModel.addPlayerToRoom(user.language, user);
 
             socket.broadcast.emit("messageResponse", {
                 text: `${user.username} has joined the game`,
@@ -40,7 +42,9 @@ io.on("connection", (socket) => {
                 name: ""
             });
 
-            onlineUsers.push(user);
+            
+            // const players = Database.getPlayers(user.language);
+            // // console.log(`${user.language} players: ` + JSON.stringify(players, null, 2)); 
         }
     });
 
@@ -49,9 +53,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        const user = onlineUsers.find((user) => user.id === socket.id);
+        const user = Database.findPlayerById(socket.id)
+        console.log(user)
         if (user) {
             console.log(`${user.username} disconnected`);
+
             socket.broadcast.emit("messageResponse", {
                 text: `${user.username} has left the game`,
                 color: "text-red-800", 
@@ -59,20 +65,20 @@ io.on("connection", (socket) => {
                 language: user.language,
                 name: ""
             });
-            removeUser(user.username);
-            console.log(onlineUsers)
+
             // Remove the user from the room but keep them in the online users list
             socket.leave(user.language);
+            Database.removePlayer(user.language, user.id);
         }
     });
-
 });
 
 const emitOnlineUsers = () => {
-    io.emit("onlineUsers", onlineUsers);
+    const allOnlineUsers = Database.getAllOnlineUsers();
+    io.emit("onlineUsers", allOnlineUsers);
 };
 
-setInterval(emitOnlineUsers, 1000);
+setInterval(emitOnlineUsers, 500);
 
 
 server.listen(5172, () => {
