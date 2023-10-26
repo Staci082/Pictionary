@@ -4,7 +4,6 @@ import cors from "cors";
 import { Server } from "socket.io";
 import Database from "./utils/database/database";
 import GameModel from "./models/GameModel";
-import { Languages } from "./models/GameModel";
 
 const app = express();
 app.use(cors());
@@ -30,12 +29,11 @@ function sendPlayerListToClient(roomName: string) {
 io.on("connection", (socket) => {
 
 
-    socket.on("newUser", (data) => {
-        const { user } = Database.addPlayer(data);
-
+    socket.on("newUser", (user) => {
+       
         if (user) {
             console.log(`user ${user.username} connected`);
-            // socket.join(user.language);
+
             gameModel.addPlayerToRoom(user.language, user);
 
             socket.broadcast.emit("messageResponse", {
@@ -46,15 +44,17 @@ io.on("connection", (socket) => {
                 name: ""
             });
 
-            sendPlayerListToClient(data.language);
+            sendPlayerListToClient(user.language);
         }
     });
 
     socket.on("message", (data) => {
         socket.broadcast.to(data.language).emit("messageResponse", data);
+        
         const playersInRoom = gameModel.getAllPlayersInRoom(data.language);
+
         playersInRoom.forEach((player) => {
-           console.log(player)
+            console.log(player)
         });
     });
 

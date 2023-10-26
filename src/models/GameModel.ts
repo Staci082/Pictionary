@@ -1,8 +1,7 @@
-// GameModel.ts
 
 import { Player } from "../models/PlayerModel"
-import { User } from "../utils/database/database";
 import wordsData from "../utils/words/words.json";
+
 export const Languages: string[] = ["English", "Français", "Nederlands", "Español", "Română"];
 
 class GameModel {

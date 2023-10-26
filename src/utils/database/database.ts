@@ -49,29 +49,29 @@ const database: Data[] = [
 ];
 
 class Database {
-    static getAllOnlineUsers(): User[] {
-        const onlineUsers: User[] = [];
-        for (const room of database) {
-            onlineUsers.push(...room.players);
-        }
-        return onlineUsers;
-    }
+    // static getAllOnlineUsers(): User[] {
+    //     const onlineUsers: User[] = [];
+    //     for (const room of database) {
+    //         onlineUsers.push(...room.players);
+    //     }
+    //     return onlineUsers;
+    // }
 
-    static addPlayer(user: User) {
-        const room = database.find((room) => room.room === user.language);
-        if (room) {
-            room.players.push(user);
-            return { user };
-        } else {
-            console.error(`Invalid language: ${user.language}`);
-            return { user: null };
-        }
-    }
+    // static addPlayer(user: User) {
+    //     const room = database.find((room) => room.room === user.language);
+    //     if (room) {
+    //         room.players.push(user);
+    //         return { user };
+    //     } else {
+    //         console.error(`Invalid language: ${user.language}`);
+    //         return { user: null };
+    //     }
+    // }
 
-    static getPlayers(language: string) {
-        const room = database.find((room) => room.room === language);
-        return room ? room.players : [];
-    }
+    // static getPlayers(language: string) {
+    //     const room = database.find((room) => room.room === language);
+    //     return room ? room.players : [];
+    // }
 
     static findPlayerById(playerId: string): User | null {
         for (const room of database) {
