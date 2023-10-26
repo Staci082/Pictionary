@@ -14,7 +14,7 @@ Welcome to this Online Multiplayer Pictionary Game, "Doodle Martians", a fun and
 ## Features
 
 - **Multiplayer Gameplay:** Enjoy a real-time multiplayer gaming experience with your friends.
-- **Four Language Rooms:** Choose from rooms in English, French, Dutch, and Spanish.
+- **Five Language Rooms:** Choose from rooms in English, French, Dutch, Spanish, and Romanian.
 - **Drawing and Guessing:** Take turns drawing words or guessing the drawings created by others.
 - **Scoring System:** Earn points for correctly guessing words and compete for the highest score.
 - **Real-time Communication:** Achieve seamless communication through socket.io.
