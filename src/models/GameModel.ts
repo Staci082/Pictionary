@@ -8,10 +8,10 @@ export const Languages: string[] = ["English", "Fran√ßais", "Nederlands", "Espa√
 class GameModel {
 
     private rooms: { [roomName: string]: RoomData }; // Object to store room-specific data
-   
 
     constructor() {
         this.rooms = {};
+        // create rooms
         for (const language of Languages) {
             this.createRoom(language);
         }
@@ -20,7 +20,6 @@ class GameModel {
     // Create a new room
     createRoom(roomName: string) {
         this.rooms[roomName] = new RoomData();
-        console.log("Room created: " , roomName);
     }
 
     // Add a player to a specific room
@@ -44,7 +43,10 @@ class GameModel {
             this.rooms[roomName].setCurrentWord(word);
         }
     }
-
+    
+    getAllPlayersInRoom(roomName: string): Player[] {
+        return this.getPlayersInRoom(roomName);
+    }
     // Getters for game state of a specific room
     getPlayersInRoom(roomName: string): Player[] {
         return this.rooms[roomName] ? this.rooms[roomName].getPlayers() : [];

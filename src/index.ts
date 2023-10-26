@@ -4,8 +4,7 @@ import cors from "cors";
 import { Server } from "socket.io";
 import Database from "./utils/database/database";
 import GameModel from "./models/GameModel";
-import { forEach } from "lodash";
-
+import { Languages } from "./models/GameModel";
 
 const app = express();
 app.use(cors());
@@ -22,6 +21,11 @@ const io = new Server(server, {
 
 
 const gameModel = new GameModel();
+
+function sendPlayerListToClient(roomName: string) {
+    const playersInRoom = gameModel.getAllPlayersInRoom(roomName);
+    io.emit("onlineUsers", playersInRoom);
+}
 
 io.on("connection", (socket) => {
 
@@ -42,14 +46,16 @@ io.on("connection", (socket) => {
                 name: ""
             });
 
-            
-            // const players = Database.getPlayers(user.language);
-            // // console.log(`${user.language} players: ` + JSON.stringify(players, null, 2)); 
+            sendPlayerListToClient(data.language);
         }
     });
 
     socket.on("message", (data) => {
         socket.broadcast.to(data.language).emit("messageResponse", data);
+        const playersInRoom = gameModel.getAllPlayersInRoom(data.language);
+        playersInRoom.forEach((player) => {
+           console.log(player)
+        });
     });
 
     socket.on("disconnect", () => {
@@ -73,12 +79,14 @@ io.on("connection", (socket) => {
     });
 });
 
-const emitOnlineUsers = () => {
-    const allOnlineUsers = Database.getAllOnlineUsers();
-    io.emit("onlineUsers", allOnlineUsers);
-};
 
-setInterval(emitOnlineUsers, 500);
+
+// const emitOnlineUsers = () => {
+//     const allOnlineUsers = Database.getAllOnlineUsers();
+//     io.emit("onlineUsers", allOnlineUsers);
+// };
+
+// setInterval(emitOnlineUsers, 500);
 
 
 server.listen(5172, () => {
