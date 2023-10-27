@@ -1,11 +1,20 @@
 import GameModel from "../models/GameModel";
-import { Player } from "../models/PlayerModel"
+import { Player } from "../models/PlayerModel";
+import { Server } from "socket.io";
+
+const phaseDuration = {
+    wordSelection: 15 * 1000, // 15 seconds for word selection
+    drawing: 3 * 60 * 1000, // 3 minutes for drawing
+    wordDisplay: 5 * 1000, // 5 seconds for word display
+};
 
 export class TurnManager {
     private gameModel: GameModel;
+    private io: Server;
 
-    constructor(gameModel: GameModel) {
+    constructor(gameModel: GameModel, io: Server) {
         this.gameModel = gameModel;
+        this.io = io;
     }
 
     // Add methods for starting and ending turns, handling turn phases, etc.
@@ -21,6 +30,7 @@ export class TurnManager {
 
     startTurn(nextPlayer: Player) {
         console.log(`It's now ${nextPlayer.username}'s turn.`);
+        this.emitTurnMessage(nextPlayer, `It's ${nextPlayer.username}'s turn.`, "text-green-600");
     }
 
     // end turn and make next player
@@ -39,5 +49,15 @@ export class TurnManager {
                 this.startTurn(nextPlayer);
             }
         }
+    }
+
+    emitTurnMessage(user: Player, text: string, color: string) {
+        this.io.emit("messageResponse", {
+            text: text,
+            color: color,
+            id: `${Math.random()}`,
+            language: user.language,
+            name: "",
+        });
     }
 }

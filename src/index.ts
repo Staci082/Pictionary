@@ -20,19 +20,15 @@ const io = new Server(server, {
 });
 
 const gameModel = new GameModel();
-const turnManager = new TurnManager(gameModel);
+const turnManager = new TurnManager(gameModel, io);
 
 // send list of online users to frontend
 function sendPlayerListToClient(roomName: string) {
     const playersInRoom = gameModel.getAllPlayersInRoom(roomName);
+
     io.emit("onlineUsers", playersInRoom);
 }
 
-const phaseDuration = {
-    wordSelection: 15 * 1000, // 15 seconds for word selection
-    drawing: 3 * 60 * 1000, // 3 minutes for drawing
-    wordDisplay: 5 * 1000, // 5 seconds for word display
-};
 
 
 io.on("connection", (socket) => {
@@ -42,26 +38,25 @@ io.on("connection", (socket) => {
     }
     const userSocketMap: UserSocketMap = {};
 
-    
-// message response template
-function sendMessageResponse(user: Player, text: string, color: string) {
-    socket.broadcast.emit("messageResponse", {
-        text: text,
-        color: color,
-        id: `${socket.id}${Math.random()}`,
-        language: user.language,
-        name: "",
-    });
-}
+    // message response template
+    function sendMessageResponse(user: Player, text: string, color: string) {
+        socket.broadcast.emit("messageResponse", {
+            text: text,
+            color: color,
+            id: `${socket.id}${Math.random()}`,
+            language: user.language,
+            name: "",
+        });
+    }
 
     // ON NEW USER
     socket.on("newUser", (user) => {
         if (user) {
+            userSocketMap[socket.id] = user;
             const roomName = user.language;
             console.log(`user ${user.username} connected`);
 
             gameModel.addPlayerToRoom(roomName, user);
-            userSocketMap[socket.id] = user;
 
             sendMessageResponse(user, `${user.username} has joined the game`, "text-green-800");
             sendPlayerListToClient(roomName);
@@ -106,7 +101,7 @@ function sendMessageResponse(user: Player, text: string, color: string) {
             }
 
             gameModel.removePlayerFromRoom(roomName, user.id);
-            sendPlayerListToClient(roomName)
+            sendPlayerListToClient(roomName);
         }
     });
 });
