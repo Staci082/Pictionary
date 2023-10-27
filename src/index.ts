@@ -4,6 +4,7 @@ import cors from "cors";
 import { Server } from "socket.io";
 import GameModel from "./models/GameModel";
 import { Player } from "./models/PlayerModel";
+import { TurnManager } from './utils/TurnManager';
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ const io = new Server(server, {
 });
 
 const gameModel = new GameModel();
+const turnManager = new TurnManager(gameModel);
 
 // send list of online users to frontend
 function sendPlayerListToClient(roomName: string) {
@@ -42,9 +44,10 @@ io.on("connection", (socket) => {
     // ON NEW USER
     socket.on("newUser", (user) => {
         if (user) {
+            const roomName = user.language;
             console.log(`user ${user.username} connected`);
 
-            gameModel.addPlayerToRoom(user.language, user);
+            gameModel.addPlayerToRoom(roomName, user);
             userSocketMap[socket.id] = user;
             socket.broadcast.emit("messageResponse", {
                 text: `${user.username} has joined the game`,
@@ -53,31 +56,13 @@ io.on("connection", (socket) => {
                 language: user.language,
                 name: "",
             });
-            sendPlayerListToClient(user.language);
+            sendPlayerListToClient(roomName);
 
-            if (gameModel.getPlayersInRoom(user.language).length === 1) {
-                // Start the turn-based game when the first player joins
-                console.log("Starting turn-based game.");
-                startTurn(user.language);
+            if (gameModel.getPlayersInRoom(roomName).length === 1) {
+                turnManager.startTurn(roomName);
             }
         }
     });
-
-    
-    function startTurn(roomName: string) {
-        const roomData = gameModel.getRoomData(roomName);
-        if (roomData) {
-            const playersInRoom = roomData.getPlayers();
-            const currentTurn = roomData.getCurrentTurn();
-
-            console.log(`It's ${playersInRoom[currentTurn].username}'s turn.`);
-
-            // Implement your turn logic here
-            // Set the turnPhase to "wordSelection", "drawing", etc.
-            // Implement timers for each phase
-            // Notify players about their turn, and when the turn ends, increment the turn
-        }
-    }
 
     // MESSAGE SENT
     socket.on("message", (data) => {
@@ -94,6 +79,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         const user = userSocketMap[socket.id];
         if (user) {
+            const roomName = user.language;
             console.log(`${user.username} disconnected`);
 
             socket.broadcast.emit("messageResponse", {
@@ -103,28 +89,25 @@ io.on("connection", (socket) => {
                 language: user.language,
                 name: "",
             });
-            const roomName = user.language;
             const roomData = gameModel.getRoomData(roomName);
-    
+
             if (roomData) {
-                // Remove the player from the room
-                gameModel.removePlayerFromRoom(roomName, user.id);
+                // Check if the disconnected user was the one with the current turn
                 const currentTurn = roomData.getCurrentTurn();
+                const currentPlayer = roomData.getPlayers()[currentTurn];
     
-                if (currentTurn < roomData.getPlayers().length) {
-                    // Increment the turn
-                    roomData.incrementTurn();
-    
-                    // Get the next player in turn
-                    const nextPlayer = roomData.getPlayers()[currentTurn];
-    
-                    // Implement your logic to notify the next player that it's their turn
-                    // For example, you can emit a "nextTurn" event to the next player's socket.
-                    // You can use `io.to(nextPlayer.id).emit("nextTurn", yourData)` to notify the next player.
-    
-                    console.log(`It's now ${nextPlayer.username}'s turn.`);
+                if (currentPlayer.id === user.id) {
+                    // End the current turn
+                    turnManager.endTurn(roomName);
                 }
-        }
+                if (currentTurn < roomData.getPlayers().length) {
+                    const nextPlayer = roomData.getPlayers()[currentTurn];
+                }
+            }
+
+            gameModel.removePlayerFromRoom(roomName, user.id)
+
+            
     }});
 });
 

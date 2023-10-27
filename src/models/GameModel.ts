@@ -1,6 +1,6 @@
 
 import { Player } from "../models/PlayerModel"
-import wordsData from "../utils/words/words.json";
+
 
 export const Languages: string[] = ["English", "Français", "Nederlands", "Español", "Română"];
 
@@ -24,7 +24,6 @@ class GameModel {
     addPlayerToRoom(roomName: string, player: Player) {
         if (this.rooms[roomName]) {
             this.rooms[roomName].addPlayer(player);
-            console.log('Player added to room: ', roomName)
         }
     }
 
@@ -32,7 +31,6 @@ class GameModel {
     removePlayerFromRoom(roomName: string, playerId: string) {
         if (this.rooms[roomName]) {
             this.rooms[roomName].removePlayer(playerId);
-            console.log('Player left room: ', roomName)
         }
     }
 
