@@ -4,7 +4,7 @@ import cors from "cors";
 import { Server } from "socket.io";
 import GameModel from "./models/GameModel";
 import { Player } from "./models/PlayerModel";
-import { TurnManager } from './utils/TurnManager';
+import { TurnManager } from "./utils/TurnManager";
 
 const app = express();
 app.use(cors());
@@ -34,12 +34,25 @@ const phaseDuration = {
     wordDisplay: 5 * 1000, // 5 seconds for word display
 };
 
+
 io.on("connection", (socket) => {
     // creating object of socket users to be able to retrieve them on disconnect
     interface UserSocketMap {
         [socketId: string]: Player;
     }
     const userSocketMap: UserSocketMap = {};
+
+    
+// message response template
+function sendMessageResponse(user: Player, text: string, color: string) {
+    socket.broadcast.emit("messageResponse", {
+        text: text,
+        color: color,
+        id: `${socket.id}${Math.random()}`,
+        language: user.language,
+        name: "",
+    });
+}
 
     // ON NEW USER
     socket.on("newUser", (user) => {
@@ -49,17 +62,12 @@ io.on("connection", (socket) => {
 
             gameModel.addPlayerToRoom(roomName, user);
             userSocketMap[socket.id] = user;
-            socket.broadcast.emit("messageResponse", {
-                text: `${user.username} has joined the game`,
-                color: "text-green-800",
-                id: `${socket.id}${Math.random()}`,
-                language: user.language,
-                name: "",
-            });
+
+            sendMessageResponse(user, `${user.username} has joined the game`, "text-green-800");
             sendPlayerListToClient(roomName);
 
             if (gameModel.getPlayersInRoom(roomName).length === 1) {
-                turnManager.startTurn(roomName);
+                turnManager.startGame(roomName);
             }
         }
     });
@@ -82,33 +90,25 @@ io.on("connection", (socket) => {
             const roomName = user.language;
             console.log(`${user.username} disconnected`);
 
-            socket.broadcast.emit("messageResponse", {
-                text: `${user.username} has left the game`,
-                color: "text-red-800",
-                id: `${socket.id}${Math.random()}`,
-                language: user.language,
-                name: "",
-            });
+            sendMessageResponse(user, `${user.username} has left the game`, "text-red-800");
+
             const roomData = gameModel.getRoomData(roomName);
 
             if (roomData) {
                 // Check if the disconnected user was the one with the current turn
                 const currentTurn = roomData.getCurrentTurn();
                 const currentPlayer = roomData.getPlayers()[currentTurn];
-    
+
+                // if it was current user's turn then end their turn
                 if (currentPlayer.id === user.id) {
-                    // End the current turn
                     turnManager.endTurn(roomName);
-                }
-                if (currentTurn < roomData.getPlayers().length) {
-                    const nextPlayer = roomData.getPlayers()[currentTurn];
                 }
             }
 
-            gameModel.removePlayerFromRoom(roomName, user.id)
-
-            
-    }});
+            gameModel.removePlayerFromRoom(roomName, user.id);
+            sendPlayerListToClient(roomName)
+        }
+    });
 });
 
 server.listen(5172, () => {

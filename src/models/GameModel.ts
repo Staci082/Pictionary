@@ -86,7 +86,6 @@ class RoomData {
     // Remove a player from the room
     removePlayer(playerId: string) {
         this.players = this.players.filter((player) => player.id !== playerId);
-        console.log(this.players)
     }
 
     getTurnPhase(): string {
