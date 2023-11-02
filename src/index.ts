@@ -19,13 +19,15 @@ export const io = new Server(server, {
     },
 });
 
+
 const gameModel = new GameModel();
 const turnManager = new TurnManager(gameModel);
 
-// send list of online users to frontend
+
+
+// transfer list of online players to frontend
 function sendPlayerListToClient(roomName: string) {
     const playersInRoom = gameModel.getAllPlayersInRoom(roomName);
-
     io.emit("playersInRoom", playersInRoom);
 }
 
@@ -54,11 +56,16 @@ io.on("connection", (socket) => {
         if (user) {
             userSocketMap[socket.id] = user;
             const roomName = user.language;
+
             console.log(`user ${user.username} connected`);
 
+            // add player to room
             gameModel.addPlayerToRoom(roomName, user);
 
+            // let chat announce new player
             sendMessageResponse(user, `${user.username} has joined the game`, "text-green-800");
+
+            // transfer data of new player to frontend
             sendPlayerListToClient(roomName);
 
             if (gameModel.getPlayersInRoom(roomName).length === 1) {
@@ -68,14 +75,8 @@ io.on("connection", (socket) => {
     });
 
     // MESSAGE SENT
-    socket.on("message", (data) => {
+    socket.on("message", (data) => {  // bounce message from player back to everyone in room
         socket.broadcast.to(data.language).emit("messageResponse", data);
-
-        const playersInRoom = gameModel.getAllPlayersInRoom(data.language);
-
-        playersInRoom.forEach((player) => {
-            console.log(player);
-        });
     });
 
     // ON DISCONNECT
@@ -85,6 +86,7 @@ io.on("connection", (socket) => {
             const roomName = user.language;
             console.log(`${user.username} disconnected`);
 
+            // let chat know player has left the game
             sendMessageResponse(user, `${user.username} has left the game`, "text-red-800");
 
             const roomData = gameModel.getRoomData(roomName);
@@ -100,11 +102,15 @@ io.on("connection", (socket) => {
                 }
             }
 
+            // remove player from room
             gameModel.removePlayerFromRoom(roomName, user.id);
+
+            // update frontend player list
             sendPlayerListToClient(roomName);
         }
     });
 });
+
 
 server.listen(5172, () => {
     console.log("SERVER RUNNING");

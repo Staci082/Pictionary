@@ -28,6 +28,8 @@ export class TurnManager {
     startTurn(currentPlayer: Player) {
         console.log(`It's now ${currentPlayer.username}'s turn.`);
         this.emitTurnMessage(currentPlayer, `It's ${currentPlayer.username}'s turn.`, "text-green-600");
+
+        // transfer current player turn data to frontend
         io.to(currentPlayer.language).emit("currentPlayer", currentPlayer.id);
     }
 
