@@ -13,7 +13,7 @@ export default function Players() {
 
     return (
         <>
-        <button onClick={() => console.log(players)} className="h-8 w-8 bg-red-300"></button>
+        <button onClick={() => console.log(currentTurn)} className="h-8 w-8 bg-red-300"></button>
 
 
             {players
@@ -27,7 +27,7 @@ export default function Players() {
                                         backgroundImage: `url("./pencil.avif")`,
                                         backgroundSize: "contain",
                                         backgroundRepeat: "no-repeat",
-                                         visibility: currentTurn ? "visible" : "hidden",
+                                        visibility: currentTurn === user.id ? "visible" : "hidden",
                                     }}
                                     className="sm:w-10 sm:h-10 w-7 h-7"
                                 ></div>

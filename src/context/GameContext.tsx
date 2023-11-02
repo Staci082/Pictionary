@@ -15,7 +15,7 @@ type GameProviderProps = {
   };
 
   const initialContextValue = {
-    currentTurn: null,
+    currentTurn: "",
     players: [] as User[], // An empty array to match the players structure 
  };
 
@@ -28,18 +28,22 @@ export function useGame() {
 
 
 export function GameProvider({ children }: GameProviderProps) {
-    const [currentTurn, setCurrentTurn] = useState(null);
+    const [currentTurn, setCurrentTurn] = useState("");
     const [players, setPlayers] = useState<User[]>([]);
 
 
     useEffect(() => {
-        socket.on("currentPlayer", (newTurn) => {
-            setCurrentTurn(newTurn);
+        socket.on("currentPlayer", (userId) => {
+            setCurrentTurn(userId);
         });
 
         socket.on("playersInRoom", (users: User[]) => {
             setPlayers(users);
-        });
+            if (currentTurn === "" && users.length > 0) {
+              // Set currentTurn to the user ID of the first player if not already set
+              setCurrentTurn(users[0].id);
+            }
+          });
 
     }, [socket]);
 
