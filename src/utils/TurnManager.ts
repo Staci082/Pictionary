@@ -1,6 +1,6 @@
 import GameModel from "../models/GameModel";
 import { Player } from "../models/PlayerModel";
-import { Server } from "socket.io";
+import { io } from "../index"
 
 const phaseDuration = {
     wordSelection: 15 * 1000, // 15 seconds for word selection
@@ -10,14 +10,10 @@ const phaseDuration = {
 
 export class TurnManager {
     private gameModel: GameModel;
-    private io: Server;
-
-    constructor(gameModel: GameModel, io: Server) {
+    constructor(gameModel: GameModel) {
         this.gameModel = gameModel;
-        this.io = io;
     }
 
-    // Add methods for starting and ending turns, handling turn phases, etc.
     startGame(roomName: string) {
         const roomData = this.gameModel.getRoomData(roomName);
         if (roomData) {
@@ -28,9 +24,11 @@ export class TurnManager {
         }
     }
 
-    startTurn(nextPlayer: Player) {
-        console.log(`It's now ${nextPlayer.username}'s turn.`);
-        this.emitTurnMessage(nextPlayer, `It's ${nextPlayer.username}'s turn.`, "text-green-600");
+    // start turn phase
+    startTurn(currentPlayer: Player) {
+        console.log(`It's now ${currentPlayer.username}'s turn.`);
+        this.emitTurnMessage(currentPlayer, `It's ${currentPlayer.username}'s turn.`, "text-green-600");
+        io.to(currentPlayer.language).emit("currentPlayer", currentPlayer.id);
     }
 
     // end turn and make next player
@@ -51,8 +49,10 @@ export class TurnManager {
         }
     }
 
+
+    // chat messages for turn updates
     emitTurnMessage(user: Player, text: string, color: string) {
-        this.io.emit("messageResponse", {
+        io.to(user.language).emit("messageResponse", {
             text: text,
             color: color,
             id: `${Math.random()}`,

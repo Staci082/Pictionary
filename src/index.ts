@@ -12,7 +12,7 @@ app.use(json());
 
 const server = createServer(app);
 
-const io = new Server(server, {
+export const io = new Server(server, {
     cors: {
         origin: "http://localhost:5173",
         methods: ["GET", "POST"],
@@ -20,13 +20,13 @@ const io = new Server(server, {
 });
 
 const gameModel = new GameModel();
-const turnManager = new TurnManager(gameModel, io);
+const turnManager = new TurnManager(gameModel);
 
 // send list of online users to frontend
 function sendPlayerListToClient(roomName: string) {
     const playersInRoom = gameModel.getAllPlayersInRoom(roomName);
 
-    io.emit("onlineUsers", playersInRoom);
+    io.emit("playersInRoom", playersInRoom);
 }
 
 
