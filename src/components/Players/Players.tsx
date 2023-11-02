@@ -15,7 +15,6 @@ export default function Players() {
         <>
         <button onClick={() => console.log(currentTurn)} className="h-8 w-8 bg-red-300"></button>
 
-
             {players
                 .filter((user) => user.language === selectedLanguage)
                 .map((user) => (
@@ -27,6 +26,7 @@ export default function Players() {
                                         backgroundImage: `url("./pencil.avif")`,
                                         backgroundSize: "contain",
                                         backgroundRepeat: "no-repeat",
+                                        // add pencil indicater to show who is currently on turn
                                         visibility: currentTurn === user.id ? "visible" : "hidden",
                                     }}
                                     className="sm:w-10 sm:h-10 w-7 h-7"
