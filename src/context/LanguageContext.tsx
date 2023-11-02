@@ -6,7 +6,7 @@ interface LanguageContextProps {
     updateLanguage: (language: string) => void;
 }
 
-export const Languages: string[] = ["English", "Français", "Nederlands", "Español", "Românesc"]
+export const Languages: string[] = ["English", "Français", "Nederlands", "Español", "Română"]
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 

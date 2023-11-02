@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AvatarSlider from "../components/AvatarSlider";
 import { useNavigate } from "react-router-dom";
-import { SocketProp } from "../props/SocketProp";
+import { SocketProp } from "../props/Socket";
 import StarsAnimation from "../components/StarsAnimation";
 import { useLanguage, Languages } from "../context/LanguageContext";
 import Translations from "../translations/translations";
@@ -23,7 +23,7 @@ function Homepage({ socket }: SocketProp) {
         localStorage.setItem("id", socket.id);
         localStorage.setItem("language", selectedLanguage);
 
-        socket.emit("newUser", { username: username, avatar: selectedAvatar, id: socket.id, language: selectedLanguage });
+        socket.emit("newUser", { username: username, avatar: selectedAvatar, id: socket.id, points: 0, language: selectedLanguage });
         navigate("/game");
     };
 

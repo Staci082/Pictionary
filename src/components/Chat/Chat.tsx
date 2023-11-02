@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { SocketProp } from "../../props/SocketProp";
+import { SocketProp } from "../../props/Socket";
 import { useLanguage } from "../../context/LanguageContext";
 import MessageList from "./ChatMessages";
 import ChatInput from "./ChatInput";
-
 
 function Chat({ socket }: SocketProp) {
     const [message, setMessage] = useState<string>("");
@@ -11,7 +10,7 @@ function Chat({ socket }: SocketProp) {
     const { selectedLanguage } = useLanguage();
 
     const sendMessage = () => {
-        // Don't send empty messages
+        // don't send empty messages
         if (message.trim() === "") {
             return;
         }
@@ -22,7 +21,7 @@ function Chat({ socket }: SocketProp) {
             name,
             id: `${socket.id}${Math.random()}`,
             color: "black",
-            language: selectedLanguage, 
+            language: selectedLanguage,
         };
 
         setChatHistory([...chatHistory, newMessage]);
@@ -30,6 +29,7 @@ function Chat({ socket }: SocketProp) {
         setMessage("");
     };
 
+    // retrieve messages from backend
     useEffect(() => {
         socket.on("messageResponse", (data) => setChatHistory([...chatHistory, data]));
     }, [socket, chatHistory]);

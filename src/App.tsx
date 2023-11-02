@@ -3,9 +3,7 @@ import Homepage from "./pages/Homepage";
 import Game from "./pages/Game";
 import Error from "./pages/Error";
 import { Routes, Route } from "react-router-dom";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:5172");
+import { socket } from "./props/Socket"
 
 
 function App() {

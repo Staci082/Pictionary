@@ -2,7 +2,7 @@
 import Canvas from "../components/Canvas/Canvas";
 import Chat from "../components/Chat/Chat";
 import Players from "../components/Players/Players";
-import { SocketProp } from "../props/SocketProp";
+import { SocketProp } from "../props/Socket";
 
 function Game({ socket }: SocketProp) {
     return (

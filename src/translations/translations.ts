@@ -31,7 +31,7 @@ const Translations: Record<string, Translations> = {
         // inbetween turns
         chooseWord: "Choisissez votre mot..",
         onWait: "choisit le mot..",
-        wordWas: "le mot était : "
+        wordWas: "le mot était : ",
     },
     Nederlands: {
         // homepage
@@ -47,7 +47,7 @@ const Translations: Record<string, Translations> = {
         // inbetween turns
         chooseWord: "Kies je woord..",
         onWait: "kiest het woord..",
-        wordWas: "het woord was: "
+        wordWas: "het woord was: ",
     },
     Español: {
         // homepage
@@ -63,9 +63,9 @@ const Translations: Record<string, Translations> = {
         // inbetween turns
         chooseWord: "Elige tu palabra..",
         onWait: "está eligiendo la palabra..",
-        wordWas: "la palabra era: "
+        wordWas: "la palabra era: ",
     },
-    Românesc: {
+    Română: {
         // homepage
         play: "Joacă",
         enterName: "Introduceți numele dvs..",
@@ -79,7 +79,7 @@ const Translations: Record<string, Translations> = {
         // inbetween turns
         chooseWord: "Alege-ți cuvântul..",
         onWait: "alege cuvântul..",
-        wordWas: "cuvântul a fost: "
+        wordWas: "cuvântul a fost: ",
     },
 };
 

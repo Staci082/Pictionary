@@ -1,44 +1,38 @@
-import { SocketProp } from "../../props/SocketProp";
-import { useState, useEffect } from "react";
+
 import { useLanguage } from "../../context/LanguageContext";
 import Translations from "../../translations/translations";
+ import { useGame } from '../../context/GameContext';
 
-// Define the type for a user object
-interface User {
-    username: string;
-    avatar: string;
-    id: string;
-    points: number;
-    language: string;
-}
 
-export default function Players({ socket }: SocketProp) {
-    const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
+
+export default function Players() {
+    const {  players, currentTurn } = useGame();
+
     const { selectedLanguage } = useLanguage();
-
-    useEffect(() => {
-        socket.on("onlineUsers", (users: User[]) => {
-            setOnlineUsers(users);
-        });
-    }, [socket]);
-
     const translations = Translations;
 
     return (
         <>
-            {onlineUsers
+        <button onClick={() => console.log(players)} className="h-8 w-8 bg-red-300"></button>
+
+
+            {players
                 .filter((user) => user.language === selectedLanguage)
                 .map((user) => (
                     <div key={user.id} className="my-1 flex items-center justify-center rounded-sm h-12 bg-blue-200">
                         <div className="flex items-center justify-between w-full mx-2">
-                            <div 
-                                style={{
-                                    backgroundImage: `url("./pencil.avif")`,
-                                    backgroundSize: "contain",
-                                    backgroundRepeat: "no-repeat",
-                                }}
-                                className="sm:w-10 sm:h-10 w-7 h-7"
-                            ></div>
+
+                                <div
+                                    style={{
+                                        backgroundImage: `url("./pencil.avif")`,
+                                        backgroundSize: "contain",
+                                        backgroundRepeat: "no-repeat",
+                                         visibility: currentTurn ? "visible" : "hidden",
+                                    }}
+                                    className="sm:w-10 sm:h-10 w-7 h-7"
+                                ></div>
+
+
                             <div className="flex flex-col text-center">
                                 <b className="sm:text-sm text-xs">{user.username}</b>
                                 <p className="sm:text-sm text-xs">
